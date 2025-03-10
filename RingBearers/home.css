@@ -1,0 +1,149 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('./images/lord-of-the-rings-amazon-studios.png.webp'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.title-container {
+    display: inline-block; 
+    background-color: #ff0000; 
+    padding: 15px 30px;  
+    border-radius: 15px;  
+    border: 3px solid black;  
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  
+}
+
+h1 {
+    font-size: 2.5em;  
+    color: white;  
+    margin: 0;  
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.mode-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; 
+    max-width: 500px; 
+    margin: auto; 
+    padding: 20px;
+}
+
+.mode-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; 
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    
+    
+    margin-bottom: 80px; 
+}
+
+.mode-selection button {
+    width: 250px;
+    height: 120px; 
+    border: none;
+    background-size: cover;
+    background-position: center;
+    color: white; 
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.daily_challenge {
+    background-image: url('./images/images\ \(3\).jpeg');
+}
+
+.easy {
+    background-image: url('./images/images.jpeg');
+}
+
+.hard {
+    background-image: url('./images/images\ \(1\).jpeg');
+}
+
+.survival {
+    background-image: url('./images/images\ \(4\).jpeg');
+}
+
+.blitz {
+    background-image: url('./images/images\ \(2\).jpeg');
+}
+
+.team_battle {
+    background-image: url('./images/image7.jpeg');
+}
+
+.mode-selection button:hover {
+    filter: brightness(1.2); 
+    transform: scale(1.05);
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.bottom-nav button {
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.bottom-nav button:hover {
+    color: #ffd700; 
+}
+
+.title-container {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    border: 3px solid black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+
+    background-image: url('./images/images\ \(5\).jpeg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+
+    
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: 0;
+}

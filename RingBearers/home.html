@@ -4,22 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RingBearers</title>
+    <link rel="stylesheet" href="home.css">
 </head>
-<body>
-    <header>
-
-    </header>        
-
-    <main>
-
-    </main>
-
-    <aside>
-
-    </aside>
+<body> 
+    <div class="title-container">
+        <h1>RingBearers</h1>
+    </div>
     
-    <footer>
 
+        <h2>Kies je categorie</h2>
+
+        <div class="mode-selection">
+            <button class="daily_challenge" onclick="startGame('daily_challenge')">Dagelijkse Challenge</button>
+            <button class="easy" onclick="startGame('easy')">Makkelijk</button>
+            <button class="hard" onclick="startGame('hard')">Moeilijk</button>
+            <button class="survival" onclick="startGame('survival')">Survival Modus</button>
+            <button class="blitz" onclick="startGame('blitz')">Blitz Modus</button>
+            <button class="team_battle" onclick="startGame('team_battle')">Samen met vrienden tegen anderen</button>
+          </div>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function startGame(mode) {
+            
+            window.location.href = mode + ".html"; 
+        }
+    </script>
+
+    <footer class="bottom-nav">
+        <button onclick="navigateTo('scoreboard.html')">🏆 </button>
+        <button onclick="navigateTo('settings.html')">⚙️ </button>
+        <button onclick="navigateTo('friends.html')">👥 </button>
+        <button onclick="navigateTo('mailbox.html')">📬 </button>
     </footer>
 </body>
 </html>

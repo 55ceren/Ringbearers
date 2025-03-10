@@ -44,10 +44,10 @@ header{
     background-color: rgba(50, 50, 50, 0.9);     
     border: 2px solid white; 
     box-shadow: 0 0 10px;
-    color: black;
+    color:black;
     border-radius: 10px;
     padding: 10px 20px;  
-    color: gold;   
+    color: white;   
     font-size: 27px;
 }
 
