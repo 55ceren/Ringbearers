@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto+Slab:wght@600&display=swap');
+
+body, html {
+    background: url('lord-of-the-rings-amazon-studios.png.webp') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    user-select: none;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-family: "roboto slab";
+    font-weight: 600;
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 5px 5px 8px #fdbc4b, -3px -3px 8px #f7b956, 3px -3px 8px #f8e943, -3px 3px 8px #f8f8f8;
+}
+
+.wrapper {
+    width: 420px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+.profile-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-photo {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 5px solid rgb(211, 201, 129);
+}
+
+.change-photo-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: rgb(211, 201, 129);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.change-photo-btn:hover {
+    background-color: #f2f8c5;
+}
+
+.toggle-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+    margin: 10px auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.toggle {
+    width: 60px;
+    height: 35px;
+    border-radius: 40px;
+    background-color: rgb(211, 201, 129);
+    position: relative;
+    cursor: pointer;
+    transition: background-color 300ms;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+
+.toggle-c {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    left: 5px;
+    transition: 300ms all;
+    border: 1px solid rgb(211, 201, 129);
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .toggle {
+    background-color: rgba(147, 111, 13, 0.857);
+}
+
+input[type="checkbox"]:checked + .toggle .toggle-c {
+    left: 32px;
+    background-color: white;
+    border-color: white;
+}
+
+span {
+    font-weight: 500;
+    font-family: "poppins";
+    color: #fff;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.profile-option {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 3px solid transparent;
+}
+
+.profile-option:hover {
+    border: 3px solid gold;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .change-photo-btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .toggle-group {
+        width: 220px;
+    }
+
+    .toggle {
+        width: 50px;
+        height: 30px;
+    }
+
+    .toggle-c {
+        width: 22px;
+        height: 22px;
+    }
+
+    input[type="checkbox"]:checked + .toggle .toggle-c {
+        left: 26px;
+    }
+}
