@@ -29,6 +29,8 @@ body{
     width: 780px;
     height: fit-content;
     background-color: rgba(0, 0, 0, 0.6); 
+    margin-top: 10px;
+    margin-bottom: 10px; 
 }
 
 header{

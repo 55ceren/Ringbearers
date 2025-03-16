@@ -115,3 +115,26 @@ function shuffleArray(array) {
 function goBack() {
     window.location.href = "home.html";
 }
+
+ let thumbsUp = document.getElementById("thumbs-up");
+        let thumbsDown = document.getElementById("thumbs-down");
+
+        thumbsUp.addEventListener("click", function () {
+            if (thumbsUp.style.color === "green") {
+                thumbsUp.style.color = "white"; 
+            } else {
+                thumbsUp.style.color = "green";
+                thumbsDown.style.color = "white"; 
+                alert("Toegevoegd bij favorieten");
+            }
+        });
+
+        thumbsDown.addEventListener("click", function () {
+            if (thumbsDown.style.color === "red") {
+                thumbsDown.style.color = "white"; 
+            } else {
+                thumbsDown.style.color = "red";
+                thumbsUp.style.color = "white"; 
+                alert("Geblacklisted");
+            }
+        });

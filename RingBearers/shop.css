@@ -8,14 +8,57 @@ body {
     background-position: center;
 }
 
+
+header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;    
+}
+
+.back-button {
+    font-size: 18px;
+    color: white;
+    background-color: rgba(70, 70, 70, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: gold;
+    color: black;
+}
+
+.arrow-icon {
+    font-size: 80px;
+}
+
 .shop-text {
     text-align: center;
     font-size: 30px;
 }
 
+.shop-intro-wrapper {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 200px; 
+    text-align: center;    
+}
+
 .shop-intro {
     font-size: 20px;
+    line-height: 1.5;
+    max-width: 800px; 
+    border: 2px black solid;
+    width: 542px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
+
 
 .product-grid {
     display: grid;

@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,18 +10,23 @@ h1 {
     color: white;        
 }
 
-body{
+body {
     display: flex;
-    justify-content: center ;
-    align-items: center;
+    justify-content: center; 
+    align-items: center; 
     flex-direction: column;
     min-height: 100vh;
     background: url('./images/lord-of-the-rings-amazon-studios.png.webp') no-repeat;
     background-size: cover;
-    background-position: center;    
+    background-position: center;
+    padding: 20px;
 }
 
 .game-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
     border: 5px solid white;
     padding: 20px;
     border-radius: 15px;
@@ -30,58 +35,41 @@ body{
     max-width: 900px; 
     height: fit-content;
     background-color: rgba(0, 0, 0, 0.6); 
-    display: flex;
-    justify-content: space-between; 
-    flex-wrap: wrap; 
     gap: 20px; 
 }
 
-header{
+header {
     display: flex;
-    align-items: center;
+    justify-content: center; 
+    align-items: center; 
     gap: 40px;
-    justify-content: center;  
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: none;  
-    border: none;  
-    color: gold;  
-    font-size: 2em;  
-}
-
-.back-button:hover {
-    color: yellow;  
-}
-
-.level-info{   
-    background-color: rgba(50, 50, 50, 0.9);     
-    border: 2px solid white; 
-    box-shadow: 0 0 10px;
-    color: black;
-    border-radius: 10px;
-    padding: 10px 20px;  
-    color: gold;   
-    font-size: 27px;
-}
-
-.fas{
-    font-size: 50px; 
-    color: white; 
+.fas {
+    font-size: 50px;
+    color: white;
     cursor: pointer;
 }
 
-.fas:hover{
+.fas:hover {
     color: gold;
+}
+
+.level-info {   
+    background-color: rgba(50, 50, 50, 0.9);
+    border: 2px solid white;
+    box-shadow: 0 0 10px;
+    color: black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: gold;
+    font-size: 27px;
 }
 
 .quiz-image {
     display: flex;
-    margin: 25px auto;
+    margin: 0px auto 25px;
     width: 400px;
     max-width: 100%;
     height: 250px;
@@ -89,42 +77,23 @@ header{
     border-radius: 8px;
 }
 
-.completion-bar {
-    width: 400px; 
-    max-width: 500px; 
-    height: 20px;
-    background-color: #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    margin: 15px 0;
-    margin-left: auto;  
-    margin-right: auto; 
-}
-
-#progress-bar{
-    height: 100%;
-    background-color: gold; 
-    border-radius: 10px;
-    transition: width 0.3s ease;
-}
-
-#quote{
+#quote {
     text-align: center;
     color: white;
     font-size: 21px;
 }
 
-#buttons{
+#buttons {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center; 
     gap: 20px;
 }
 
-.answers{
-    background-color: rgba(50, 50, 50, 0.9); 
-    color: white; 
-    border: 2px solid white; 
+.answers {
+    background-color: rgba(50, 50, 50, 0.9);
+    color: white;
+    border: 2px solid white;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 18px;
@@ -134,14 +103,13 @@ header{
     margin-top: 25px;
     width: 350px;
     display: inline-block;
-
     animation-name: spawning-in;
-    animation-duration: 1s; 
-    animation-fill-mode: forwards; 
-    animation-timing-function: ease-in-out; 
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
 }
 
-.answers:hover{
+.answers:hover {
     background-color: gold;
     color: black;
 }
@@ -157,58 +125,16 @@ header{
     }
 }
 
-.level-up-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 20px;
-    text-align: center;
-    z-index: 1000;
-    animation: fadeInOut 3s ease-in-out;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); 
+.player-container {
     display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-}
-
-.bottom-nav button {
-    background: none;
-    border: none;
-    font-size: 2em;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.bottom-nav button:hover {
-    color: #ffd700; 
-}
-
-.game-container {
-    margin-bottom: 100px; 
+    justify-content: center; 
+    gap: 20px;
+    width: 100%;
 }
 
 .player-board {
-    width: 100%;  
+    width: 100%;
+    max-width: 400px; 
     padding: 20px;
     border: 2px solid white;
     border-radius: 10px;
@@ -217,7 +143,7 @@ header{
     color: white;
     text-align: center;
     margin-bottom: 20px;
-    flex: 1 1 45%; 
+    flex: 1 1 45%;
 }
 
 #timerA, #timerB {
@@ -225,10 +151,4 @@ header{
     margin-top: 10px;
     font-weight: bold;
     color: gold;
-}
-
-.answers {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }

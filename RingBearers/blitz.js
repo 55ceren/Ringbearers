@@ -37,19 +37,19 @@ async function fetchQuoteAndCharacter() {
             }
         }
 
-        let backgroundQuiz = document.getElementById("background-quiz")
-        let wrongAnswer = document.getElementById("wrong-answer")
-        let rightAnswer = document.getElementById("right-answer")
+        let backgroundQuiz = document.getElementById("background-quiz");
+        let wrongAnswer = document.getElementById("wrong-answer");
+        let rightAnswer = document.getElementById("right-answer");
 
         function updateProgressBar(increment) {
             let progressBar = document.getElementById("progress-bar");
             let currentWidth = parseInt(progressBar.style.width);
-                        
+
             let newWidth = currentWidth + increment;
             if (newWidth > 100) {
                 newWidth = 100;
             }
-            
+
             progressBar.style.width = newWidth + "%";
         }
 
@@ -82,15 +82,15 @@ async function fetchQuoteAndCharacter() {
                 rightAnswer.style.display = "none";
                 wrongAnswer.style.display = "flex";
             }
-            
+
             setTimeout(() => {
                 location.reload();
             }, 2000);
 
             let levelUp = document.getElementById("level-up");
-            levelUp.innerText = "7/10";
+            levelUp.innerText = "2/10";
 
-            updateProgressBar(10);    
+            updateProgressBar(10);
         }
 
         button1.addEventListener("click", function () {
@@ -105,20 +105,30 @@ async function fetchQuoteAndCharacter() {
             handleButtonClick(button3);
         });
 
-        let thumbsUp = document.getElementById("thumbs-up")
-        let thumbsDown = document.getElementById("thumbs-down")
-        
+        let thumbsUp = document.getElementById("thumbs-up");
+        let thumbsDown = document.getElementById("thumbs-down");
+
         thumbsUp.addEventListener("click", function () {
-            alert("Added to favorites")
-            thumbsUp.style.color = "green";
-            thumbsDown.style.color = "white";
-        })
+            if (thumbsUp.style.color === "green") {
+                thumbsUp.style.color = "white"; 
+            } else {
+                thumbsUp.style.color = "green";
+                thumbsDown.style.color = "white"; 
+                alert("Toegevoegd bij favorieten");
+            }
+        });
 
         thumbsDown.addEventListener("click", function () {
-            alert("Blacklisted")
-            thumbsDown.style.color = "red";
-            thumbsUp.style.color = "white";
-        })
+            if (thumbsDown.style.color === "red") {
+                thumbsDown.style.color = "white"; 
+            } else {
+                thumbsDown.style.color = "red";
+                thumbsUp.style.color = "white"; 
+                alert("Geblacklisted");
+            }
+        });
+
+        startTimer();
 
     } catch (error) {
         console.error("Fout bij ophalen:", error);
@@ -148,8 +158,8 @@ function startTimer() {
         if (timeLeft <= 0) {
             clearInterval(timer);
             alert("Tijd om! Volgende vraag.");
-            currentQuestionIndex++;
-            loadQuestion(currentQuestionIndex);
+
+            location.reload();
         }
     }, 1000);
 }
@@ -165,7 +175,9 @@ function showLevelUpMessage(level) {
         levelUpDiv.remove();
     }, 3000);
 }
+
 function goBack() {
     window.location.href = "home.html";
 }
+
 fetchQuoteAndCharacter();

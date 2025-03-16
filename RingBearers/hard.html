@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="game-container">
+        <h1 class="level-info" style="color: white; font-weight: bold; margin-bottom: 20px; border: 5px black dotted;">Hard</h1>
         <header>
             <a href="./home.html"><i class="fas fa-arrow-left"></i></a>    
             <h1 class="level-info">Level 1</h1>
@@ -16,6 +17,9 @@
             <i id="thumbs-up" class="fas fa-thumbs-up" style="font-size: 3em; cursor: pointer;"></i>
             <i id="thumbs-down" class="fas fa-thumbs-down" style="font-size: 3em; cursor: pointer;"></i>
         </header>
+        
+        <p id="timer" style="text-align: center;">30</p>
+        
         <main>       
             <div>
                 <img src="./images/hard.png" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
@@ -24,8 +28,7 @@
             </div>
             <div id="timer-container">
                 <div id="timer-bar"></div>
-            </div>
-            <p id="timer">30</p>
+            </div>            
             
         
             <p id="quote"></p>
@@ -37,16 +40,6 @@
             </div>                
         </main>
 
-        <footer class="bottom-nav">
-            <div class="bottom-nav">
-                <a href="home.html"><button><i class="fas fa-home"></i></button></a>
-                <a href="settings.html"><button><i class="fas fa-cog"></i></button></a>
-                <a href="friends.html"><button><i class="fas fa-user-friends"></i></button></a>
-                <a href="leaderboard.html"><button><i class="fas fa-trophy"></i></button></a>
-                <a href="inbox.html"><button><i class="fas fa-envelope"></i></button></a>
-            </div>
-            
-        </footer>
         <script src="hard.js"></script>
 
     </div>

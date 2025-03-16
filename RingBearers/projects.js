@@ -27,7 +27,7 @@ photos.forEach((photo, i) => {
 
     photo.addEventListener("click", function() {
         if (photo !== photos[3]) {
-            alert("This option is not available");
+            alert("Deze optie is niet beschikbaar");
         }
     });
 });

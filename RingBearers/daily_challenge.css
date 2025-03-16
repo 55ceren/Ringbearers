@@ -171,32 +171,10 @@ header{
     80% { opacity: 1; }
     100% { opacity: 0; }
 }
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); 
-    display: flex;
-    justify-content: space-around;
-    padding: 3px 0;
-}
-
-.bottom-nav button {
-    background: none;
-    border: none;
-    font-size: 1em;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.bottom-nav button:hover {
-    color: #ffd700; 
-}
 
 .game-container {
-    margin-bottom: 100px; 
+    margin-top: 10px;
+    margin-bottom: 10px; 
 }
 #timer-container {
     width: 100%;

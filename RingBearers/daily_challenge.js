@@ -62,7 +62,7 @@ async function fetchQuoteAndCharacter() {
 
             setTimeout(() => location.reload(), 2000);
 
-            document.getElementById("level-up").innerText = "7/10";
+            document.getElementById("level-up").innerText = "2/10";
             updateProgressBar(10);
         }
 
@@ -70,16 +70,27 @@ async function fetchQuoteAndCharacter() {
             button.addEventListener("click", () => handleButtonClick(button));
         });
 
-        document.getElementById("thumbs-up").addEventListener("click", function () {
-            alert("Added to favorites");
-            this.style.color = "green";
-            document.getElementById("thumbs-down").style.color = "white";
+        let thumbsUp = document.getElementById("thumbs-up");
+        let thumbsDown = document.getElementById("thumbs-down");
+
+        thumbsUp.addEventListener("click", function () {
+            if (thumbsUp.style.color === "green") {
+                thumbsUp.style.color = "white"; 
+            } else {
+                thumbsUp.style.color = "green";
+                thumbsDown.style.color = "white"; 
+                alert("Toegevoegd bij favorieten");
+            }
         });
 
-        document.getElementById("thumbs-down").addEventListener("click", function () {
-            alert("Blacklisted");
-            this.style.color = "red";
-            document.getElementById("thumbs-up").style.color = "white";
+        thumbsDown.addEventListener("click", function () {
+            if (thumbsDown.style.color === "red") {
+                thumbsDown.style.color = "white"; 
+            } else {
+                thumbsDown.style.color = "red";
+                thumbsUp.style.color = "white"; 
+                alert("Geblacklisted");
+            }
         });
 
     } catch (error) {
