@@ -1,64 +1,109 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll(".answers");
-    const homePage = "home.html"; // Verander dit als je een andere homepagina hebt
-    let currentQuestionIndex = 0;
-    let questions = [];
+document.getElementById("quote").innerText = "Loading..."; // Aangenamer voor de gebruikers
 
-    // Functie om quizvragen op te halen
-    async function fetchQuestions() {
-        try {
-            const response = await fetch("https://opentdb.com/api.php?amount=10&category=11&type=multiple");
-            const data = await response.json();
-            questions = data.results;
-            loadQuestion(currentQuestionIndex);
-        } catch (error) {
-            console.error("Error fetching questions: ", error);
-            alert("Er is iets mis gegaan bij het ophalen van de vragen.");
+const apiKey = "0QtkvkcNqsseU-8tvS3o"; // API sleutel, haal een nieuwe op indien nodig
+
+async function fetchQuoteAndCharacter() {
+    try {
+        let quoteResponse = await fetch("https://the-one-api.dev/v2/quote", {
+            method: "GET",
+            headers: { "Authorization": `Bearer ${apiKey}` }
+        });
+        let quoteData = await quoteResponse.json();
+        let randomQuote = quoteData.docs[Math.floor(Math.random() * quoteData.docs.length)];
+
+        let characterResponse = await fetch("https://the-one-api.dev/v2/character", {
+            method: "GET",
+            headers: { "Authorization": `Bearer ${apiKey}` }
+        });
+        let characterData = await characterResponse.json();
+        let characters = characterData.docs;
+
+        let character = characters.find(c => c._id === randomQuote.character);
+
+        document.getElementById("quote").innerText = `"${randomQuote.dialog}"`;
+
+        let buttons = document.getElementsByClassName("answers");
+        let randomButtonIndex = Math.floor(Math.random() * buttons.length);
+        buttons[randomButtonIndex].innerText = character.name;
+
+        for (let i = 0; i < buttons.length; i++) {
+            if (i !== randomButtonIndex) {
+                buttons[i].innerText = characters[Math.floor(Math.random() * characters.length)].name;
+            }
         }
-    }
 
-    // Functie om de vraag en antwoorden te laden
-    function loadQuestion(index) {
-        if (index < questions.length) {
-            const question = questions[index];
-            const questionText = question.question;
-            const correctAnswer = question.correct_answer;
-            const allAnswers = [...question.incorrect_answers, correctAnswer];
-            shuffleArray(allAnswers);
+        let backgroundQuiz = document.getElementById("background-quiz");
+        let wrongAnswer = document.getElementById("wrong-answer");
+        let rightAnswer = document.getElementById("right-answer");
 
-            document.getElementById("quote").innerHTML = questionText;
-            buttons.forEach((button, i) => {
-                button.innerText = allAnswers[i];
-                button.onclick = function () {
-                    if (this.innerText === correctAnswer) {
-                        alert("Goed gedaan! Volgende vraag...");
-                        currentQuestionIndex++;
-                        loadQuestion(currentQuestionIndex);
-                    } else {
-                        alert("Fout antwoord! Game over.");
-                        window.location.href = homePage;
-                    }
-                };
-            });
-        } else {
-            alert("Je hebt alle vragen beantwoord! Terug naar de homepagina.");
-            window.location.href = homePage;
+        function updateProgressBar(increment) {
+            let progressBar = document.getElementById("progress-bar");
+            let currentWidth = parseInt(progressBar.style.width) || 0;
+            let newWidth = Math.min(currentWidth + increment, 100);
+            progressBar.style.width = newWidth + "%";
         }
-    }
 
-    // Shuffle functie voor de antwoorden
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Swap elementen
+        function handleButtonClick(button) {
+            Array.from(buttons).forEach(btn => btn.disabled = true);
+
+            if (button.innerText === character.name) {
+                button.style.backgroundColor = "green";
+                rightAnswer.style.display = "flex";
+                wrongAnswer.style.display = "none";
+                updateProgressBar(10);
+            } else {
+                button.style.backgroundColor = "red";
+                [...buttons].find(b => b.innerText === character.name).style.backgroundColor = "green";
+                wrongAnswer.style.display = "flex";
+                rightAnswer.style.display = "none";
+
+                
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 1000);
+                return;
+            }
+
+            backgroundQuiz.style.display = "none";
+
+            document.getElementById("level-up").innerText = "7/10";
+
+            setTimeout(() => location.reload(), 2000);
         }
-    }
 
-    // Laad de vragen bij het starten van de game
-    fetchQuestions();
+        Array.from(buttons).forEach(button => {
+            button.addEventListener("click", () => handleButtonClick(button));
+        });
 
-    // Terugknop functionaliteit
-    function goBack() {
-        window.location.href = homePage;
+        document.getElementById("thumbs-up").addEventListener("click", function () {
+            alert("Added to favorites");
+            this.style.color = "green";
+            document.getElementById("thumbs-down").style.color = "white";
+        });
+
+        document.getElementById("thumbs-down").addEventListener("click", function () {
+            alert("Blacklisted");
+            this.style.color = "red";
+            document.getElementById("thumbs-up").style.color = "white";
+        });
+
+    } catch (error) {
+        console.error("Fout bij ophalen:", error);
+        document.getElementById("quote").innerText = "Kon geen quote ophalen.";
     }
-});
+}
+
+function showLevelUpMessage(level) {
+    let levelUpDiv = document.createElement("div");
+    levelUpDiv.classList.add("level-up-message");
+    levelUpDiv.innerText = `🎉 Gefeliciteerd! Je bent nu Level ${level}!`;
+
+    document.body.appendChild(levelUpDiv);
+    setTimeout(() => levelUpDiv.remove(), 3000);
+}
+
+function goBack() {
+    window.location.href = "home.html";
+}
+
+fetchQuoteAndCharacter();

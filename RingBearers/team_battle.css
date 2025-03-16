@@ -26,14 +26,14 @@ body{
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    width: 90%; /* Maak de container responsiever */
-    max-width: 900px; /* Zorg ervoor dat de container niet breder wordt dan 900px */
+    width: 90%; 
+    max-width: 900px; 
     height: fit-content;
     background-color: rgba(0, 0, 0, 0.6); 
     display: flex;
-    justify-content: space-between; /* Borden naast elkaar */
-    flex-wrap: wrap; /* Laat de borden op kleinere schermen onder elkaar komen */
-    gap: 20px; /* Voegt ruimte tussen de borden toe */
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    gap: 20px; 
 }
 
 header{
@@ -204,11 +204,11 @@ header{
 }
 
 .game-container {
-    margin-bottom: 100px; /* Dit duwt de game-container omhoog */
+    margin-bottom: 100px; 
 }
 
 .player-board {
-    width: 100%;  /* Verbreed de borden op kleinere schermen */
+    width: 100%;  
     padding: 20px;
     border: 2px solid white;
     border-radius: 10px;
@@ -217,7 +217,7 @@ header{
     color: white;
     text-align: center;
     margin-bottom: 20px;
-    flex: 1 1 45%; /* Zorgt ervoor dat ze naast elkaar staan */
+    flex: 1 1 45%; 
 }
 
 #timerA, #timerB {
