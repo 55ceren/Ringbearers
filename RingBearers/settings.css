@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto+Slab:wght@600&display=swap');
 
 body, html {
-    background: url('lord-of-the-rings-amazon-studios.png.webp') no-repeat center center fixed;
+    background: url('./images/lord-of-the-rings-amazon-studios.png.webp') no-repeat center center fixed;
     background-size: cover;
     background-attachment: fixed;
     user-select: none;
@@ -48,11 +48,12 @@ h1 {
     width: 200px;
     height: 200px;
     object-fit: cover;
-    border: 5px solid rgb(211, 201, 129);
+    border: 5px solid black;
 }
 
 .change-photo-btn {
-    margin-top: 20px;
+    margin-top: 7px;
+    margin-bottom: 7px;
     padding: 12px 24px;
     background-color: rgb(211, 201, 129);
     color: white;
@@ -89,7 +90,6 @@ h1 {
     align-items: center;
     padding: 2px;
 }
-
 
 .toggle-c {
     width: 25px;
@@ -168,6 +168,34 @@ span {
 
 .profile-option:hover {
     border: 3px solid gold;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.bottom-nav button {
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#log-out{
+    margin-bottom: 70px;
+}
+
+.bottom-nav button:hover {
+    color: #ffd700; 
 }
 
 @media (max-width: 768px) {

@@ -38,19 +38,6 @@ header{
     justify-content: center;  
     margin-bottom: 20px; 
 }
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: none;  
-    border: none;  
-    color: gold;  
-    font-size: 2em;  
-}
-
-.back-button:hover {
-    color: yellow;  
-}
 
 .level-info{   
     background-color: rgba(50, 50, 50, 0.9);     
@@ -180,53 +167,4 @@ header{
         opacity: 1;
         transform: scale(1);
     }
-}
-.level-up-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 20px;
-    text-align: center;
-    z-index: 1000;
-    animation: fadeInOut 3s ease-in-out;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); 
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-}
-
-.bottom-nav button {
-    background: none;
-    border: none;
-    font-size: 2em;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.bottom-nav button:hover {
-    color: #ffd700; 
-}
-
-.game-container {
-    margin-bottom: 100px; 
 }

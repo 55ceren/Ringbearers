@@ -12,7 +12,7 @@ body {
     justify-content: center ;
     align-items: center;
     min-height: 100vh;
-    background: url('lord-of-the-rings-amazon-studios.png.webp')no-repeat;
+    background: url('./images/lord-of-the-rings-amazon-studios.png.webp')no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -99,6 +99,10 @@ body {
     font-size : 16px;
     color: #333;
     font-weight: 600;
+}
+
+.btn{
+    margin-top: 20px;
 }
 
 .wrapper .register-link{

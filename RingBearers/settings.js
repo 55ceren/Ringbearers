@@ -8,7 +8,7 @@ document.querySelector(".close").addEventListener("click", function () {
 
 function selectPhoto(photoSrc) {
     
-    document.querySelector(".profile-photo").src = "images/" + photoSrc; 
+    document.querySelector(".profile-photo").src = "images/settings/" + photoSrc; 
 
     document.getElementById("profileModal").style.display = "none"; 
 }

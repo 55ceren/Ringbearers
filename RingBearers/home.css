@@ -73,20 +73,20 @@ h2 {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
-.daily_challenge {
-    background-image: url('./images/images\ \(3\).jpeg');
+.daily_challenge {    
+    background-image: url('./images/images\ \(4\).jpeg');
 }
 
-.easy {
-    background-image: url('./images/images.jpeg');
+.rounds10 {
+    background-image: url('./images/image 6.jpeg');
 }
 
 .hard {
     background-image: url('./images/images\ \(1\).jpeg');
 }
 
-.survival {
-    background-image: url('./images/images\ \(4\).jpeg');
+.sudden-death {
+    background-image: url('./images/survival.png');
 }
 
 .blitz {
