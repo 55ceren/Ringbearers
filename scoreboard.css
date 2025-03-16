@@ -1,0 +1,77 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('./images/lord-of-the-rings-amazon-studios.png.webp') no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.scoreboard-container {
+    border: 5px solid white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 570px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    position: relative;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.scoreboard-title {
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+}
+
+.back-button {
+    font-size: 18px;
+    color: white;
+    background-color: rgba(70, 70, 70, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: gold;
+    color: black;
+}
+
+
+#scoreboard {
+    list-style-type: none;
+    padding: 0;
+}
+
+#scoreboard li {
+    background-color: rgba(50, 50, 50, 0.9);
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+#scoreboard li span {
+    font-weight: bold;
+}

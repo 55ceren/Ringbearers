@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postbus</title>
+    <link rel="stylesheet" href="inbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="postbus-container">
+        <header>
+            <h1 class="postbus-title">Postbus</h1>
+            <a href="home.html" class="back-button">
+                <i class="arrow-icon fas fa-arrow-left"></i> Terug
+            </a>
+        </header>
+        
+        <h2>Uitnodigingen</h2>
+        <ul id="invites-list">
+            <li>
+                <span class="invite-sender">Oguzhan</span>
+                <span class="invite-actions">
+                    <button class="accept-btn">Accepteren</button>
+                    <button class="decline-btn">Weigeren</button>
+                </span>
+            </li>
+            <li>
+                <span class="invite-sender">Sara</span>
+                <span class="invite-actions">
+                    <button class="accept-btn">Accepteren</button>
+                    <button class="decline-btn">Weigeren</button>
+                </span>
+            </li>
+        </ul>
+        
+        <h2>Nieuwe berichten</h2>
+        <ul id="messages-list">
+            <li>
+                <span class="message-sender">Oguzhan:</span>
+                <span class="message-content">Welke modus ga je spelen?</span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="inbox.js"></script>
+</body>
+</html>
