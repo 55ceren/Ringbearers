@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vriendenlijst</title>
+    <link rel="stylesheet" href="friendlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="friendlist-container">
+        <header>
+            <h1 class="friendlist-title">Vriendenlijst</h1>
+            <a href="home.html" class="back-button">
+                <i class="arrow-icon fas fa-arrow-left"></i> Terug
+            </a>
+        </header>
+        
+        <div class="add-friend">
+            <input type="text" id="friend-name" placeholder="Voer een spelersnaam in...">
+            <button id="add-friend-btn">Voeg toe</button>
+        </div>
+        <p id="friend-message"></p>
+
+        <h2>Vrienden</h2>
+        <ul id="friend-list">
+            <li>Oguzhan <span class="friend-actions"><button class="invite-btn">Uitnodigen</button> <button class="remove-btn">Verwijderen</button></span></li>
+            <li>Sara <span class="friend-actions"><button class="invite-btn">Uitnodigen</button> <button class="remove-btn">Verwijderen</button></span></li>
+            <li>Ceren <span class="friend-actions"><button class="invite-btn">Uitnodigen</button> <button class="remove-btn">Verwijderen</button></span></li>
+            <li>Aymane <span class="friend-actions"><button class="invite-btn">Uitnodigen</button> <button class="remove-btn">Verwijderen</button></span></li>
+        </ul>
+
+        <h2>In behandeling</h2>
+        <ul id="pending-requests">
+            <li>speler12</li>
+            <li>lotrfan12</li>
+            <li>23naam</li>
+        </ul>
+    </div>
+
+    <script src="friendlist.js"></script>
+</body>
+</html>
