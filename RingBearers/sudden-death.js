@@ -103,24 +103,36 @@ async function fetchQuoteAndCharacter() {
         }
 
         function checkCompletion() {
-            if (selectedCharacter !== null && selectedMovie !== null) {                
-                if (selectedCharacter && selectedMovie) {
-                    document.getElementById("right-answer").style.display = "block";
-                    document.getElementById("wrong-answer").style.display = "none";
-                } else {
-                    document.getElementById("wrong-answer").style.display = "block";
-                    document.getElementById("right-answer").style.display = "none";
-                }
-              
+            if (selectedCharacter === false || selectedMovie === false) {
+                document.getElementById("game-over").style.display = "block";
+                document.getElementById("right-answer").style.display = "none";
+                document.getElementById("wrong-answer").style.display = "none";
                 document.getElementById("background-quiz").style.display = "none";
-                
+        
+                updateProgressBar(0);
+               
+                document.querySelectorAll(".answers").forEach(button => {
+                    button.disabled = true;
+                });
+                       
+                return; 
+            }
+        
+            if (selectedCharacter && selectedMovie) {
+                document.getElementById("right-answer").style.display = "block";
+                document.getElementById("wrong-answer").style.display = "none";
+                document.getElementById("background-quiz").style.display = "none";
+        
+                updateProgressBar(10);
+
                 let levelUp = document.getElementById("level-up")
                 levelUp.innerText = "2/10"
-                
-                updateProgressBar(10)
-                setTimeout(() => location.reload(), 2000);                
+
+                setTimeout(() => location.reload(), 2000);
             }
         }
+        
+        
 
         leftButtons.forEach(button => button.addEventListener("click", () => handleCharacterClick(button)));
         rightButtons.forEach(button => button.addEventListener("click", () => handleMovieClick(button)));
