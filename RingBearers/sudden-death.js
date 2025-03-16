@@ -131,8 +131,6 @@ async function fetchQuoteAndCharacter() {
                 setTimeout(() => location.reload(), 2000);
             }
         }
-        
-        
 
         leftButtons.forEach(button => button.addEventListener("click", () => handleCharacterClick(button)));
         rightButtons.forEach(button => button.addEventListener("click", () => handleMovieClick(button)));
