@@ -97,8 +97,4 @@ function showLevelUpMessage(level) {
     setTimeout(() => levelUpDiv.remove(), 3000);
 }
 
-function goBack() {
-    window.location.href = "home.html";
-}
-
 fetchQuoteAndCharacter();

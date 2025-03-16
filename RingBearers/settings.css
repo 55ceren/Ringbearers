@@ -16,12 +16,41 @@ body, html {
     text-align: center;
 }
 
+header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 h1 {
     font-family: "roboto slab";
     font-weight: 600;
     font-size: 40px;
     color: #fff;
     text-shadow: 5px 5px 8px #fdbc4b, -3px -3px 8px #f7b956, 3px -3px 8px #f8e943, -3px 3px 8px #f8f8f8;
+}
+
+.back-button {
+    font-size: 18px;
+    color: white;
+    background-color: rgba(70, 70, 70, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: gold;
+    color: black;
+}
+
+.arrow-icon {
+    font-size: 20px;
 }
 
 .wrapper {
@@ -168,34 +197,6 @@ span {
 
 .profile-option:hover {
     border: 3px solid gold;
-}
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); 
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-}
-
-.bottom-nav button {
-    background: none;
-    border: none;
-    font-size: 2em;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-#log-out{
-    margin-bottom: 70px;
-}
-
-.bottom-nav button:hover {
-    color: #ffd700; 
 }
 
 @media (max-width: 768px) {

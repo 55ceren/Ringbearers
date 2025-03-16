@@ -132,6 +132,7 @@ h2 {
     border-radius: 15px;
     border: 3px solid black;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
 
     background-image: url('./images/images\ \(5\).jpeg'); 
     background-size: cover; 
