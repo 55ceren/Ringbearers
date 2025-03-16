@@ -26,7 +26,7 @@ body{
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    width: 780px;
+    width: 600px;
     height: fit-content;
     background-color: rgba(0, 0, 0, 0.6); 
 }
@@ -34,7 +34,7 @@ body{
 header{
     display: flex;
     align-items: center;
-    gap: 60px;
+    gap: 40px;
     justify-content: center;  
     margin-bottom: 20px; 
 }
@@ -73,18 +73,10 @@ header{
     color: gold;
 }
 
-.non-clickable {      
-    pointer-events: none; 
-}
-
-.non-clickable:hover {
-    color: white; 
-}
-
 .quiz-image {
     display: flex;
     margin: 25px auto;
-    width: 450px;
+    width: 400px;
     max-width: 100%;
     height: 250px;
     border: black 5px solid;
@@ -92,8 +84,8 @@ header{
 }
 
 .completion-bar {
-    width: 450px; 
-    max-width: 550px; 
+    width: 400px; 
+    max-width: 500px; 
     height: 20px;
     background-color: #ddd;
     border-radius: 10px;
@@ -114,36 +106,13 @@ header{
     text-align: center;
     color: white;
     font-size: 21px;
-    margin-bottom: 22px;
 }
 
 #buttons{
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-}
-
-#buttons-left{
-    display: flex;
-    align-items: start;
     flex-direction: column;
-    margin-right: 10px;
     gap: 20px;
-}
-
-#buttons-right{
-    display: flex;
-    align-items: end;
-    flex-direction: column;
-    margin-left: 10px;
-    gap: 20px;
-}
-
-#buttons-left, #buttons-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
 }
 
 .answers{
@@ -156,7 +125,7 @@ header{
     cursor: pointer;
     text-align: center;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    margin-top: 15px;
+    margin-top: 25px;
     width: 350px;
     display: inline-block;
 
@@ -202,7 +171,6 @@ header{
     80% { opacity: 1; }
     100% { opacity: 0; }
 }
-
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -211,13 +179,13 @@ header{
     background-color: rgba(0, 0, 0, 0.8); 
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 3px 0;
 }
 
 .bottom-nav button {
     background: none;
     border: none;
-    font-size: 2em;
+    font-size: 1em;
     color: white;
     cursor: pointer;
     transition: 0.3s;
@@ -229,4 +197,18 @@ header{
 
 .game-container {
     margin-bottom: 100px; 
+}
+#timer-container {
+    width: 100%;
+    background-color: lightgray;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+#timer-bar {
+    height: 20px;
+    width: 100%;
+    background-color: #4caf50; 
+    transition: width 1s linear;
 }

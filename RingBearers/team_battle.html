@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level</title>
-    <link rel="stylesheet" href="./api-modes.css">
+    <link rel="stylesheet" href="team_battle.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">    
 </head>
 <body>
@@ -20,32 +20,38 @@
         </header>
         <main>       
             <div>
-                <img src="./images/lotr-happy.jpg" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
+                <img src="./images/team_battle.png" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
                 <img style="display: none;" src="./images/elrond-st-anthony.jpg" alt="Quiz afbeelding" id="wrong-answer" class="quiz-image">
                 <img style="display: none;" src="./images/lotrhappy.jpg" alt="Quiz afbeelding" id="right-answer" class="quiz-image">                 
             </div>
 
-            <div class="completion-bar">
-                <div id="progress-bar" style="width: 0%;"></div> 
-            </div>
-            
+        
             <p id="quote"></p>
 
-            <section id="buttons">
-                <div id="buttons-left">         
-                    <i class="fas fa-user non-clickable"></i>           
-                    <button id="button1" class="answers"></button>
-                    <button id="button2" class="answers"></button>
-                    <button id="button3" class="answers"></button>               
+            <div class="game-container">
+                <!-- Player A Board -->
+                <div class="player-board" id="playerA">
+                    <h2>Speler A</h2>
+                    <div id="questionA"></div>
+                    <button class="answer-btn" onclick="submitAnswer('A')">Antwoord</button>
+                    <div id="timerA">30</div>
                 </div>
 
-                <div id="buttons-right">   
-                    <i class="fas fa-film non-clickable"></i>                 
-                    <button id="button4" class="answers"></button> 
-                    <button id="button5" class="answers"></button> 
-                    <button id="button6" class="answers"></button> 
+                <!-- Player B Board -->
+                <div class="player-board" id="playerB">
+                    <h2>Speler B</h2>
+                    <div id="questionB"></div>
+                    <button class="answer-btn" onclick="submitAnswer('B')">Antwoord</button>
+                    <div id="timerB">30</div>
                 </div>
-            </section>
+            </div>
+
+            <div id="buttons">
+                <button id="button1" class="answers"></button>
+                <button id="button2" class="answers"></button>
+                <button id="button3" class="answers"></button>            
+            </div>
+                      
         </main>
 
         <footer class="bottom-nav">
@@ -55,9 +61,10 @@
                 <a href="friends.html"><button><i class="fas fa-user-friends"></i></button></a>
                 <a href="leaderboard.html"><button><i class="fas fa-trophy"></i></button></a>
                 <a href="inbox.html"><button><i class="fas fa-envelope"></i></button></a>
-            </div>    
+            </div>
         </footer>
-        <script src="./10rounds.js"></script>
+
+        <script src="team_battle.js"></script>
     </div>
 </body>
 </html>
