@@ -15,12 +15,12 @@
         <h2>Kies je categorie</h2>
 
         <div class="mode-selection">
-            <button class="daily_challenge" onclick="startGame('daily_challenge')">Dagelijkse Challenge</button>
+            <button class="daily-challenge" onclick="startGame('daily-challenge')">Dagelijkse Challenge</button>
             <button class="rounds10" onclick="startGame('10rounds')">10 Rounds</button>
             <button class="hard" onclick="startGame('hard')">Moeilijk</button>
             <button class="sudden-death" onclick="startGame('sudden-death')">Sudden Death</button>
             <button class="blitz" onclick="startGame('blitz')">Blitz Modus</button>
-            <button class="team_battle" onclick="startGame('team_battle')">Samen met vrienden tegen anderen</button>
+            <button class="team-battle" onclick="startGame('team-battle')">Samen met vrienden tegen anderen</button>
         </div>
     </div>
 
@@ -31,7 +31,7 @@
 
         function startGame(mode) {
             
-            window.location.href = mode + ".html"; 
+            window.location.href = mode + ".ejs"; 
         }
     </script>
 
