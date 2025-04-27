@@ -12,7 +12,7 @@ body {
     justify-content: center ;
     align-items: center;
     min-height: 100vh;
-    background: url('./images/lord-of-the-rings-amazon-studios.png.webp')no-repeat;
+    background: url('/images/lord-of-the-rings-amazon-studios.png.webp')no-repeat;
     background-size: cover;
     background-position: center;
 }

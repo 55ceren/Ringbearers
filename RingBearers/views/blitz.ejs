@@ -1,12 +1,12 @@
-<%- include("partials/header-level") %>
+<%- include("partials/header-level", { cssLink: "/css/main.css" }) %>
 
         <p id="timer" style="text-align: center;">15</p>
 
         <main>       
             <div>
-                <img src="./images/blitz.png" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
-                <img style="display: none;" src="./images/elrond-st-anthony.jpg" alt="Quiz afbeelding" id="wrong-answer" class="quiz-image">
-                <img style="display: none;" src="./images/lotrhappy.jpg" alt="Quiz afbeelding" id="right-answer" class="quiz-image">                 
+                <img src="/images/blitz.png" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
+                <img style="display: none;" src="/images/elrond-st-anthony.jpg" alt="Quiz afbeelding" id="wrong-answer" class="quiz-image">
+                <img style="display: none;" src="/images/lotrhappy.jpg" alt="Quiz afbeelding" id="right-answer" class="quiz-image">                 
             </div>
             <div id="timer-container">
                 <div id="timer-bar"></div>
@@ -19,7 +19,4 @@
                 <button id="button3" class="answers"></button>            
             </div>                
         </main>
-    </div>
-    <script src="blitz.js"></script> <!--deze in partials zetten vanaf html einde tot einde div-->
-</body>
-</html>
+<%- include('partials/footer-level', { scriptLink: "/js/blitz.js" }) %>

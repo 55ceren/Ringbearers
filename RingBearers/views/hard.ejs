@@ -1,17 +1,17 @@
-<%- include("partials/header-level") %>
+<%- include("partials/header-level", { cssLink: "/css/main.css" }) %>
         
         <p id="timer" style="text-align: center;">30</p>
         
         <main>       
             <div>
-                <img src="./images/hard.png" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
-                <img style="display: none;" src="./images/elrond-st-anthony.jpg" alt="Quiz afbeelding" id="wrong-answer" class="quiz-image">
-                <img style="display: none;" src="./images/lotrhappy.jpg" alt="Quiz afbeelding" id="right-answer" class="quiz-image">                 
+                <img src="/images/hard.png" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
+                <img style="display: none;" src="/images/elrond-st-anthony.jpg" alt="Quiz afbeelding" id="wrong-answer" class="quiz-image">
+                <img style="display: none;" src="/images/lotrhappy.jpg" alt="Quiz afbeelding" id="right-answer" class="quiz-image">                 
             </div>
+            
             <div id="timer-container">
                 <div id="timer-bar"></div>
-            </div>            
-            
+            </div>                        
         
             <p id="quote"></p>
 
@@ -20,8 +20,5 @@
                 <button id="button2" class="answers"></button>
                 <button id="button3" class="answers"></button>            
             </div>                
-        </main>    
-    </div>
-    <script src="hard.js"></script> <!--deze in partials zetten vanaf html einde tot einde div-->
-</body>
-</html>
+        </main>
+<%- include('partials/footer-level', { scriptLink: "/js/hard.js" }) %>

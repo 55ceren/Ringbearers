@@ -1,9 +1,9 @@
-<%- include("partials/header-level") %>
+<%- include("partials/header-level", { cssLink: "/css/main.css" }) %>
         <main>       
             <div>
-                <img src="./images/ROTK_eye_of_sauron.jpg" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
-                <img style="display: none;" src="./images/elrond-st-anthony.jpg" alt="Quiz afbeelding" id="wrong-answer" class="quiz-image">
-                <img style="display: none;" src="./images/lotrhappy.jpg" alt="Quiz afbeelding" id="right-answer" class="quiz-image">                 
+                <img src="/images/ROTK_eye_of_sauron.jpg" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
+                <img style="display: none;" src="/images/elrond-st-anthony.jpg" alt="Quiz afbeelding" id="wrong-answer" class="quiz-image">
+                <img style="display: none;" src="/images/lotrhappy.jpg" alt="Quiz afbeelding" id="right-answer" class="quiz-image">                 
             </div>
 
             <div class="completion-bar">
@@ -18,7 +18,4 @@
                 <button id="button3" class="answers"></button>            
             </div>             
         </main>
-    </div>
-    <script src="daily-challenge.js"></script> <!--deze in partials zetten vanaf html einde tot einde div-->
-</body>
-</html> 
+<%- include('partials/footer-level', { scriptLink: "/js/daily-challenge.js" }) %>

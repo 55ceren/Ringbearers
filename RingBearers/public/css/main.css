@@ -16,7 +16,7 @@ body{
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
-    background: url('./images/lord-of-the-rings-amazon-studios.png.webp') no-repeat;
+    background: url('/images/lord-of-the-rings-amazon-studios.png.webp') no-repeat;
     background-size: cover;
     background-position: center;    
 }
@@ -38,6 +38,7 @@ header{
     justify-content: center;  
     margin-bottom: 20px; 
 }
+
 .back-button {
     position: absolute;
     top: 20px;
@@ -83,6 +84,24 @@ header{
     border-radius: 8px;
 }
 
+.completion-bar {
+    width: 400px; 
+    max-width: 500px; 
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+    margin-left: auto;  
+    margin-right: auto; 
+}
+
+#progress-bar{
+    height: 100%;
+    background-color: gold; 
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
 
 #quote{
     text-align: center;
@@ -132,6 +151,7 @@ header{
         transform: scale(1);
     }
 }
+
 .level-up-message {
     position: fixed;
     top: 50%;
@@ -158,6 +178,9 @@ header{
     margin-top: 10px;
     margin-bottom: 10px; 
 }
+
+/**********************Modus-Hard & Modus-Blitz**********************/
+
 #timer-container {
     width: 100%;
     background-color: lightgray;
