@@ -1,9 +1,15 @@
 import express from "express";
+import gameRoutes from "./routers/gameRoutes"; 
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
+
+app.use("/games", gameRoutes);
+
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended:true}));
 
 app.use(express.static("public"));
 
@@ -15,9 +21,29 @@ app.get("/", (req, res) => {
 
 app.get("/inlog", (req, res) => {
     res.render("inlog", {
-
+        error: ""
     });
 });  
+
+app.post("/inlog", (req, res) => {
+    let username: string = req.body.username;
+    let password: string = req.body.password;
+    let remember: string = req.body.remember;
+
+    if (!username && !password) {
+        return res.render("inlog", { error: "Zowel gebruikersnaam als wachtwoord zijn verplicht." });
+    }
+    
+    if (!username) {
+        return res.render("inlog", { error: "Gebruikersnaam is verplicht." });
+    }
+
+    if (!password) {
+        return res.render("inlog", { error: "Wachtwoord is verplicht." });
+    }
+
+    res.redirect("/home");
+});
 
 app.get("/home", (req, res) => {
     res.render("home", {
@@ -25,32 +51,8 @@ app.get("/home", (req, res) => {
     });
 });
 
-app.get("/10rounds", (req, res) => {
-    res.render("10rounds", {
-
-    });
-});
-
-app.get("/blitz", (req, res) => {
-    res.render("blitz", {
-
-    });
-});
-
-app.get("/daily-challenge", (req, res) => {
-    res.render("daily-challenge", {
-
-    });
-});
-
 app.get("/friendlist", (req, res) => {
     res.render("friendlist", {
-
-    });
-});
-
-app.get("/hard", (req, res) => {
-    res.render("hard", {
 
     });
 });
@@ -72,20 +74,9 @@ app.get("/settings", (req, res) => {
 
     });
 });
+
 app.get("/shop", (req, res) => {
     res.render("shop", {
-
-    });
-});
-
-app.get("/sudden-death", (req, res) => {
-    res.render("sudden-death", {
-
-    });
-});
-
-app.get("/team-battle", (req, res) => {
-    res.render("team-battle", {
 
     });
 });

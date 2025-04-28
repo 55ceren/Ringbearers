@@ -10,30 +10,34 @@
 <body>
     
 <div class="wrapper">
-    <form action="/home">
+    <form action="/inlog" method="POST">
         <h1>Login</h1>
-
+    
         <div class="input-box">
-            <input type="text" placeholder="Gebruikersnaam" required>
+            <input type="text" name="username" placeholder="Gebruikersnaam">
             <i class='bx bxs-user'></i>
         </div>
-
+    
         <div class="input-box">
-            <input type="password" placeholder="Wachtwoord" required>
+            <input type="password" name="password" placeholder="Wachtwoord">
             <i class='bx bxs-lock-alt'></i>
         </div>
         
         <div class="remember-forget">
-            <label><input type="checkbox"> Herinner mij</label>
+            <label><input type="checkbox" name="remember"> Herinner mij</label>
             <a href="#">Wachtwoord vergeten?</a>
         </div>
 
+        <div class="error-message <%= error ? 'show' : '' %>">
+            <p><%= error || '' %></p>
+        </div>        
+    
         <button type="submit" class="btn">Login</button>
-
+    
         <div class="register-link">
             <p>Nog geen account? <a href="#">Registreer</a></p>
         </div>
-    </form>
+    </form>    
 </div>
 
 </body>
