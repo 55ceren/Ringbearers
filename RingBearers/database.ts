@@ -1,9 +1,12 @@
 import { MongoClient } from "mongodb";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import { User } from "./types";
 
 dotenv.config(); 
 
 const uri = process.env.MONGODB_URI!;
+export const MONGODB_URI = uri;
 export const client = new MongoClient(uri);
 
 const apiKey = process.env.LOTR_API_KEY;
@@ -58,4 +61,48 @@ export async function connect() {
     } catch (error) {
         console.error(error);
     }
+}
+
+export async function login(username: string, password: string): Promise<User> {
+    if (!username || !password) {
+        throw new Error("Gebruikersnaam en wachtwoord zijn verplicht.");
+    }
+
+    const db = client.db("lotrgame");
+    const user = await db.collection("users").findOne({ username });
+
+    if (!user) {
+        throw new Error("Gebruiker niet gevonden.");
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+        throw new Error("Onjuist wachtwoord.");
+    }
+
+    return {
+        _id: user._id.toString(),
+        username: user.username,
+        points: user.points
+    };
+}
+
+export async function register(username: string, password: string): Promise<void> {
+    if (!username || !password) {
+        throw new Error("Gebruikersnaam en wachtwoord zijn verplicht.");
+    }
+
+    const db = client.db("lotrgame");
+    const existingUser = await db.collection("users").findOne({ username });
+
+    if (existingUser) {
+        throw new Error("Gebruikersnaam bestaat al.");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await db.collection("users").insertOne({
+        username,
+        password: hashedPassword,
+        points: 0
+    });
 }

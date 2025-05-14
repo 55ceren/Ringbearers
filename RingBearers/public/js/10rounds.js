@@ -1,3 +1,5 @@
+import { givePoint } from './points.js';
+
 document.getElementById("quote").innerText = "loading..."; // Aangenamer voor de gebruikers
 
 const apiKey = "0QtkvkcNqsseU-8tvS3o"; // API sleutel kan je ophalen via https://the-one-api.dev/account
@@ -103,22 +105,24 @@ async function fetchQuoteAndCharacter() {
         }
 
         function checkCompletion() {
-            if (selectedCharacter !== null && selectedMovie !== null) {                
+            if (selectedCharacter !== null && selectedMovie !== null) {
                 if (selectedCharacter && selectedMovie) {
                     document.getElementById("right-answer").style.display = "block";
                     document.getElementById("wrong-answer").style.display = "none";
+                    
+                    givePoint(1);
                 } else {
                     document.getElementById("wrong-answer").style.display = "block";
                     document.getElementById("right-answer").style.display = "none";
                 }
-              
+
                 document.getElementById("background-quiz").style.display = "none";
-                
-                let levelUp = document.getElementById("level-up")
-                levelUp.innerText = "2/10"
-                
-                updateProgressBar(10)
-                setTimeout(() => location.reload(), 2000);                
+
+                let levelUp = document.getElementById("level-up");
+                levelUp.innerText = "2/10";
+
+                updateProgressBar(10);
+                setTimeout(() => location.reload(), 2000);
             }
         }
 

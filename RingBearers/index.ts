@@ -1,16 +1,20 @@
 import express from "express";
+import sessionMiddleware from "./session";
 import gameRoutes from "./routers/gameRoutes"; 
-import { connect } from "./database"
+import { connect, client, login, register } from "./database";
+import { ObjectId } from "mongodb"; 
 
 const app = express();
+
+app.use(sessionMiddleware);
+
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-app.use("/games", gameRoutes);
-
-app.use(express.json({ limit: "1mb" }));
-app.use(express.urlencoded({ extended:true}));
+app.use("/", gameRoutes);
 
 app.use(express.static("public"));
 
@@ -20,36 +24,96 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/inlog", (req, res) => {
-    res.render("inlog", {
-        error: ""
-    });
-});  
-
-app.post("/inlog", (req, res) => {
-    let username: string = req.body.username;
-    let password: string = req.body.password;
-    let remember: string = req.body.remember;
-
-    if (!username && !password) {
-        return res.render("inlog", { error: "Zowel gebruikersnaam als wachtwoord zijn verplicht." });
-    }
-    
-    if (!username) {
-        return res.render("inlog", { error: "Gebruikersnaam is verplicht." });
+app.get("/home", async (req, res) => {
+    if (!req.session.user) {
+        return res.redirect("/inlog");
     }
 
-    if (!password) {
-        return res.render("inlog", { error: "Wachtwoord is verplicht." });
-    }
+    try {
+        const db = client.db("lotrgame");
+        const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user._id) });
 
-    res.redirect("/home");
+        if (!user) {
+            req.session.destroy(() => {});
+            return res.redirect("/inlog");
+        }
+
+        res.render("home", {
+            username: user.username,
+            points: user.points
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Fout bij ophalen van gegevens.");
+    }
 });
 
-app.get("/home", (req, res) => {
-    res.render("home", {
 
+app.get("/inlog", (req, res) => {
+    res.render("inlog", { error: "" });
+});
+
+app.post("/inlog", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    try {
+        const user = await login(username, password);
+        req.session.user = user;
+        res.redirect("/home");
+    } catch (err: any) {
+        res.render("inlog", { 
+            error: err.message 
+        });
+    }
+});
+
+app.post("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send("Fout bij uitloggen.");
+        }
+        res.redirect("/inlog");
     });
+});
+
+app.get("/register", (req, res) => {
+    res.render("register", { 
+        error: "" 
+    });
+});
+
+app.post("/register", async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        await register(username, password);
+        res.redirect("/inlog");
+    } catch (err: any) {
+        res.render("register", { error: err.message });
+    }
+});
+
+app.post("/complete-quiz", async (req, res) => {
+    if (!req.session.user) {
+        res.status(401).send("Niet ingelogd");
+        return;
+    }
+
+    const userId = req.session.user._id;
+    const pointsEarned = parseInt(req.body.points);
+
+    try {
+        const db = client.db("lotrgame");
+        await db.collection("users").updateOne(
+            { _id: new ObjectId(userId) },
+            { $inc: { points: pointsEarned } } 
+        );
+        res.send("Quiz voltooid! Je hebt punten verdiend.");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Fout bij bijwerken van je punten.");
+    }
 });
 
 app.get("/friendlist", (req, res) => {
