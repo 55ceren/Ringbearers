@@ -1,38 +1,39 @@
 import express from "express";
+import { secureMiddleware } from "../secureMiddleware";
 
 const router = express.Router();
 
-router.get("/10rounds", (req, res) => {
+router.get("/10rounds", secureMiddleware, (req, res) => {
     res.render("10rounds", {
 
     });
 });
 
-router.get("/blitz", (req, res) => {
+router.get("/blitz", secureMiddleware, (req, res) => {
     res.render("blitz", {
 
     });
 });
 
-router.get("/daily-challenge", (req, res) => {
+router.get("/daily-challenge", secureMiddleware, (req, res) => {
     res.render("daily-challenge", {
 
     });
 });
 
-router.get("/hard", (req, res) => {
+router.get("/hard", secureMiddleware, (req, res) => {
     res.render("hard", {
 
     });
 });
 
-router.get("/sudden-death", (req, res) => {
+router.get("/sudden-death", secureMiddleware, (req, res) => {
     res.render("sudden-death", {
 
     });
 });
 
-router.get("/team-battle", (req, res) => {
+router.get("/team-battle", secureMiddleware, (req, res) => {
     res.render("team-battle", {
 
     });

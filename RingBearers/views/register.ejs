@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registreer Pagina</title>
+    <link rel="stylesheet" href="/css/inlog.css"> <!--Nog naamgeving veranderen!!!-->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+</head>
+<body>
+    
+<div class="wrapper">
+    <form action="/register" method="POST">
+        <h1>Registreer</h1>
+
+        <div class="input-box">
+            <input type="text" name="username" placeholder="Gebruikersnaam">
+            <i class='bx bxs-user'></i>
+        </div>
+
+        <div class="input-box">
+            <input type="email" name="email" placeholder="E-mailadres">
+            <i class='bx bxs-envelope'></i>
+        </div>
+
+        <div class="input-box">
+            <input type="password" name="password" placeholder="Wachtwoord">
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+
+        <div class="input-box">
+            <input type="password" name="confirm-password" placeholder="Bevestig wachtwoord">
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        
+        <div class="error-message <%= error ? 'show' : '' %>">
+            <p><%= error || '' %></p>
+        </div> 
+
+        <button type="submit" class="btn">Registreer</button>
+
+        <div class="login-register-link">
+            <p>Heb je al een account? <a href="/login">Login</a></p>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

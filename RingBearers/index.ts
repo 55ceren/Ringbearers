@@ -3,6 +3,7 @@ import sessionMiddleware from "./session";
 import gameRoutes from "./routers/gameRoutes"; 
 import { connect, client, login, register } from "./database";
 import { ObjectId } from "mongodb"; 
+import { secureMiddleware } from "./secureMiddleware";
 
 const app = express();
 
@@ -24,9 +25,9 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/home", async (req, res) => {
+app.get("/home", secureMiddleware, async (req, res) => {
     if (!req.session.user) {
-        return res.redirect("/inlog");
+        return res.redirect("/login");
     }
 
     try {
@@ -35,7 +36,7 @@ app.get("/home", async (req, res) => {
 
         if (!user) {
             req.session.destroy(() => {});
-            return res.redirect("/inlog");
+            return res.redirect("/login");
         }
 
         res.render("home", {
@@ -48,12 +49,21 @@ app.get("/home", async (req, res) => {
     }
 });
 
+app.get("/login", (req, res) => {
+    if (req.session.user){
+        return res.redirect("/home");
+    } 
 
-app.get("/inlog", (req, res) => {
-    res.render("inlog", { error: "" });
+    res.render("login", { 
+        error: "" 
+    });
 });
 
-app.post("/inlog", async (req, res) => {
+app.post("/login", async (req, res) => {
+    if (req.session.user) {
+        return res.redirect("/home");
+    }
+
     const username = req.body.username;
     const password = req.body.password;
 
@@ -62,39 +72,48 @@ app.post("/inlog", async (req, res) => {
         req.session.user = user;
         res.redirect("/home");
     } catch (err: any) {
-        res.render("inlog", { 
+        res.render("login", { 
             error: err.message 
         });
     }
 });
+
 
 app.post("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).send("Fout bij uitloggen.");
         }
-        res.redirect("/inlog");
+        res.redirect("/login");
     });
 });
 
 app.get("/register", (req, res) => {
+    if (req.session.user) {
+        return res.redirect("/home");
+    }
+    
     res.render("register", { 
         error: "" 
     });
 });
 
 app.post("/register", async (req, res) => {
+    if (req.session.user) {
+        return res.redirect("/home");
+    }
+
     const { username, password } = req.body;
 
     try {
         await register(username, password);
-        res.redirect("/inlog");
+        res.redirect("/login");
     } catch (err: any) {
         res.render("register", { error: err.message });
     }
 });
 
-app.post("/complete-quiz", async (req, res) => {
+app.post("/complete-quiz", secureMiddleware, async (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Niet ingelogd");
         return;
@@ -116,31 +135,31 @@ app.post("/complete-quiz", async (req, res) => {
     }
 });
 
-app.get("/friendlist", (req, res) => {
+app.get("/friendlist", secureMiddleware, (req, res) => {
     res.render("friendlist", {
 
     });
 });
 
-app.get("/inbox", (req, res) => {
+app.get("/inbox", secureMiddleware, (req, res) => {
     res.render("inbox", {
 
     });
 });
 
-app.get("/scoreboard", (req, res) => {
+app.get("/scoreboard", secureMiddleware, (req, res) => {
     res.render("scoreboard", {
 
     });
 });
 
-app.get("/settings", (req, res) => {
+app.get("/settings", secureMiddleware, (req, res) => {
     res.render("settings", {
 
     });
 });
 
-app.get("/shop", (req, res) => {
+app.get("/shop", secureMiddleware, (req, res) => {
     res.render("shop", {
 
     });
