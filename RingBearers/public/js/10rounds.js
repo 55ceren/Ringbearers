@@ -1,4 +1,19 @@
-import { givePoint } from './points.js';
+function givePoint(aantalPunten = 1) {
+    fetch("/complete-quiz", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ points: aantalPunten })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Points updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating points:", error);
+    });
+}
 
 document.getElementById("quote").innerText = "loading..."; // Aangenamer voor de gebruikers
 
@@ -105,15 +120,25 @@ async function fetchQuoteAndCharacter() {
         }
 
         function checkCompletion() {
-            if (selectedCharacter !== null && selectedMovie !== null) {
+           if (selectedCharacter !== null && selectedMovie !== null) {
+                let points = 0;
+
                 if (selectedCharacter && selectedMovie) {
+                    points = 1;
                     document.getElementById("right-answer").style.display = "block";
                     document.getElementById("wrong-answer").style.display = "none";
-                    
-                    givePoint(1);
-                } else {
+                } else if (selectedCharacter || selectedMovie) {
+                    points = 0.5;
                     document.getElementById("wrong-answer").style.display = "block";
                     document.getElementById("right-answer").style.display = "none";
+                } else {
+                    points = 0;
+                    document.getElementById("wrong-answer").style.display = "block";
+                    document.getElementById("right-answer").style.display = "none";
+                }
+
+                if (points > 0) {
+                    givePoint(points);
                 }
 
                 document.getElementById("background-quiz").style.display = "none";

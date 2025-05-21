@@ -1,3 +1,20 @@
+function givePoint(aantalPunten = 1) {
+    fetch("/complete-quiz", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ points: aantalPunten })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Points updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating points:", error);
+    });
+}
+
 document.getElementById("quote").innerText = "loading..."; // Aangenamer voor de gebruikers
 
 const apiKey = "0QtkvkcNqsseU-8tvS3o"; // API sleutel kan je ophalen via https://the-one-api.dev/account, moest het vervallen
@@ -67,6 +84,9 @@ async function fetchQuoteAndCharacter() {
                 backgroundQuiz.style.display = "none";
                 rightAnswer.style.display = "flex";
                 wrongAnswer.style.display = "none";
+
+                givePoint(1); 
+
             } else {
                 button.style.backgroundColor = "red";
 
@@ -88,9 +108,9 @@ async function fetchQuoteAndCharacter() {
             }, 2000);
 
             let levelUp = document.getElementById("level-up");
-            levelUp.innerText = "2/10";
+            levelUp.innerText = "2/10"; 
 
-            updateProgressBar(10);
+            updateProgressBar(10);           
         }
 
         button1.addEventListener("click", function () {
@@ -162,18 +182,6 @@ function startTimer() {
             location.reload();
         }
     }, 1000);
-}
-
-function showLevelUpMessage(level) {
-    let levelUpDiv = document.createElement("div");
-    levelUpDiv.classList.add("level-up-message");
-    levelUpDiv.innerText = `🎉 Gefeliciteerd! Je bent nu Level ${level}!`;
-
-    document.body.appendChild(levelUpDiv);
-
-    setTimeout(() => {
-        levelUpDiv.remove();
-    }, 3000);
 }
 
 function goBack() {

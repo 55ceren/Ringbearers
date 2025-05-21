@@ -2,6 +2,9 @@ import session from "express-session";
 import connectMongoDBSession from "connect-mongodb-session";
 import { MONGODB_URI } from "./database";
 import { User } from "./types";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const MongoDBStore = connectMongoDBSession(session);
 

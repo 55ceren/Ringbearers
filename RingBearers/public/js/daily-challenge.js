@@ -1,3 +1,20 @@
+function givePoint(aantalPunten = 1) {
+    fetch("/complete-quiz", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ points: aantalPunten })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Points updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating points:", error);
+    });
+}
+
 document.getElementById("quote").innerText = "Loading..."; // Aangenamer voor de gebruikers
 
 const apiKey = "0QtkvkcNqsseU-8tvS3o"; // API sleutel, haal een nieuwe op indien nodig
@@ -45,25 +62,42 @@ async function fetchQuoteAndCharacter() {
         }
 
         function handleButtonClick(button) {
-            Array.from(buttons).forEach(btn => btn.disabled = true);
+            button1.disabled = true;
+            button2.disabled = true;
+            button3.disabled = true;
 
             if (button.innerText === character.name) {
                 button.style.backgroundColor = "green";
+                backgroundQuiz.style.display = "none";
                 rightAnswer.style.display = "flex";
                 wrongAnswer.style.display = "none";
+
+                givePoint(1); 
+
             } else {
                 button.style.backgroundColor = "red";
-                [...buttons].find(b => b.innerText === character.name).style.backgroundColor = "green";
-                wrongAnswer.style.display = "flex";
+
+                if (button1.innerText === character.name) {
+                    button1.style.backgroundColor = "green";
+                } else if (button2.innerText === character.name) {
+                    button2.style.backgroundColor = "green";
+                } else if (button3.innerText === character.name) {
+                    button3.style.backgroundColor = "green";
+                }
+
+                backgroundQuiz.style.display = "none";
                 rightAnswer.style.display = "none";
+                wrongAnswer.style.display = "flex";
             }
 
-            backgroundQuiz.style.display = "none";
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
 
-            setTimeout(() => location.reload(), 2000);
+            let levelUp = document.getElementById("level-up");
+            levelUp.innerText = "2/10";  
 
-            document.getElementById("level-up").innerText = "2/10";
-            updateProgressBar(10);
+            updateProgressBar(10);            
         }
 
         Array.from(buttons).forEach(button => {
@@ -97,15 +131,6 @@ async function fetchQuoteAndCharacter() {
         console.error("Fout bij ophalen:", error);
         document.getElementById("quote").innerText = "Kon geen quote ophalen.";
     }
-}
-
-function showLevelUpMessage(level) {
-    let levelUpDiv = document.createElement("div");
-    levelUpDiv.classList.add("level-up-message");
-    levelUpDiv.innerText = `🎉 Gefeliciteerd! Je bent nu Level ${level}!`;
-
-    document.body.appendChild(levelUpDiv);
-    setTimeout(() => levelUpDiv.remove(), 3000);
 }
 
 fetchQuoteAndCharacter();

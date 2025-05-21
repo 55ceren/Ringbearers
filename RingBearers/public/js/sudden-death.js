@@ -1,3 +1,20 @@
+function givePoint(aantalPunten = 1) {
+    fetch("/complete-quiz", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ points: aantalPunten })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Points updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating points:", error);
+    });
+}
+
 document.getElementById("quote").innerText = "loading..."; // Aangenamer voor de gebruikers
 
 const apiKey = "0QtkvkcNqsseU-8tvS3o"; // API sleutel kan je ophalen via https://the-one-api.dev/account
@@ -71,63 +88,73 @@ async function fetchQuoteAndCharacter() {
         let selectedMovie = null;
 
         function handleCharacterClick(button) {
-            leftButtons.forEach(button => button.disabled = true);
+            leftButtons.forEach(btn => btn.disabled = true); 
 
             if (button.innerText === character.name) {
                 button.style.backgroundColor = "green";
                 selectedCharacter = true;
+                checkCompletion();
             } else {
                 button.style.backgroundColor = "red";
                 leftButtons[correctCharacterIndex].style.backgroundColor = "green";
                 selectedCharacter = false;
-            }
-            checkCompletion();
-        }
 
-        function handleMovieClick(button) {
-            rightButtons.forEach(button => button.disabled = true);
-
-            if (button.innerText === movieName) {
-                button.style.backgroundColor = "green";
-                selectedMovie = true;
-            } else {
-                button.style.backgroundColor = "red";
-                rightButtons.forEach(button => {
-                    if (button.innerText === movieName) {
-                        button.style.backgroundColor = "green";
-                    }
-                });
-                selectedMovie = false;
-            }
-            checkCompletion();
-        }
-
-        function checkCompletion() {
-            if (selectedCharacter === false || selectedMovie === false) {
+                document.querySelectorAll(".answers").forEach(btn => btn.disabled = true);
                 document.getElementById("game-over").style.display = "block";
                 document.getElementById("right-answer").style.display = "none";
                 document.getElementById("wrong-answer").style.display = "none";
                 document.getElementById("background-quiz").style.display = "none";
-        
-                updateProgressBar(0);
-               
+
+                setTimeout(() => location.reload(), 2000);
+            }
+        }
+
+        function handleMovieClick(button) {
+            rightButtons.forEach(btn => btn.disabled = true);
+
+            if (button.innerText === movieName) {
+                button.style.backgroundColor = "green";
+                selectedMovie = true;
+                checkCompletion();
+            } else {
+                button.style.backgroundColor = "red";
+                rightButtons.forEach(btn => {
+                    if (btn.innerText === movieName) {
+                        btn.style.backgroundColor = "green";
+                    }
+                });
+                selectedMovie = false;
+
+                document.querySelectorAll(".answers").forEach(btn => btn.disabled = true);
+                document.getElementById("game-over").style.display = "block";
+                document.getElementById("right-answer").style.display = "none";
+                document.getElementById("wrong-answer").style.display = "none";
+                document.getElementById("background-quiz").style.display = "none";
+
+                setTimeout(() => location.reload(), 2000);
+            }
+        }
+
+        function checkCompletion() {
+            if (selectedCharacter !== null && selectedMovie !== null) {
+                if (selectedCharacter && selectedMovie) {
+                    givePoint(1);
+                    document.getElementById("right-answer").style.display = "block";
+                    document.getElementById("wrong-answer").style.display = "none";
+                    updateProgressBar(10);
+                } else {
+                    document.getElementById("game-over").style.display = "block";
+                    document.getElementById("right-answer").style.display = "none";
+                    document.getElementById("wrong-answer").style.display = "none";
+                    updateProgressBar(0);
+                }
+
+                document.getElementById("background-quiz").style.display = "none";
+
                 document.querySelectorAll(".answers").forEach(button => {
                     button.disabled = true;
                 });
-                       
-                return; 
-            }
-        
-            if (selectedCharacter && selectedMovie) {
-                document.getElementById("right-answer").style.display = "block";
-                document.getElementById("wrong-answer").style.display = "none";
-                document.getElementById("background-quiz").style.display = "none";
-        
-                updateProgressBar(10);
-
-                let levelUp = document.getElementById("level-up")
-                levelUp.innerText = "2/10"
-
+            
                 setTimeout(() => location.reload(), 2000);
             }
         }

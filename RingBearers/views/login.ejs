@@ -11,6 +11,16 @@
     
 <div class="wrapper">
     <form action="/login" method="POST">
+        <% if (registered) { %>
+            <div class="success-message">
+                <p>Registratie succesvol! Je kunt nu inloggen.</p>
+            </div>
+        <% } %> 
+
+        <% if (deleted) { %>
+            <p class="success-message">Je account is succesvol verwijderd.</p>
+        <% } %>
+
         <h1>Login</h1>
     
         <div class="input-box">

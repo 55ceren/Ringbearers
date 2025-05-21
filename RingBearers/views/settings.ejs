@@ -19,12 +19,15 @@
     </header>
 
     <div class="profile-container">
-        <img src="your-profile-photo.jpg" alt="" class="profile-photo" style="background-color: rgba(169, 169, 169, 0.5);">
+        <img src="/images/settings/<%= user.profilePhoto %>" class="profile-photo" style="background-color: rgba(169, 169, 169, 0.5);">
         <br>
         <button class="change-photo-btn">Profiel foto wijzigen</button>
     </div>
 
     <div class="container">
+        <span>Gebruikersnaam: <%= user.username %></span>
+        <span>Punten: <%= user.points %></span>
+
         <div class="toggle-group">
             <label class="togg-label">
                 <span>Donkere modus</span>
@@ -59,9 +62,13 @@
     <br>
     <button class="change-photo-btn">Achtergrond wijzigen</button>
     <br>
-    <button class="change-photo-btn">Account verwijderen</button>
+    <form action="/delete-account" method="POST" onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen? Dit kan niet ongedaan worden gemaakt.');">
+        <button class="change-photo-btn" type="submit">Account verwijderen</button>
+    </form>
     <br>
-    <a href="/logout"><button class="change-photo-btn">- afmelden -</button></a>
+    <form action="/logout" method="POST">
+        <button class="change-photo-btn">- afmelden -</button>
+    </form>
     <br>
 
     <div id="profileModal" class="modal">
@@ -69,10 +76,10 @@
             <span class="close">&times;</span>
             <h2>Kies een nieuwe profielfoto</h2>
             <div class="photo-grid">
-                <img src="images/settings/gezicht1.jpg" class="profile-option" onclick="selectPhoto('gezicht1.jpg')">
-                <img src="images/settings/gezicht2.jpg" class="profile-option" onclick="selectPhoto('gezicht2.jpg')">
-                <img src="images/settings/gezicht3.jpg" class="profile-option" onclick="selectPhoto('gezicht3.jpg')">
-                <img src="images/settings/gezicht4.jpg" class="profile-option" onclick="selectPhoto('gezicht4.jpg')">
+                <img src="/images/settings/gezicht1.jpg" class="profile-option" onclick="selectPhoto('gezicht1.jpg')">
+                <img src="/images/settings/gezicht2.jpg" class="profile-option" onclick="selectPhoto('gezicht2.jpg')">
+                <img src="/images/settings/gezicht3.jpg" class="profile-option" onclick="selectPhoto('gezicht3.jpg')">
+                <img src="/images/settings/gezicht4.jpg" class="profile-option" onclick="selectPhoto('gezicht4.jpg')">
             </div>
         </div>
     </div>

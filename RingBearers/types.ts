@@ -1,6 +1,7 @@
 export type User = {
     _id: string;
     username: string;
-    password?: string; // alleen intern
+    password?: string;
     points: number;
+    profilePhoto?: string;
 };

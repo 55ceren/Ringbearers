@@ -1,6 +1,7 @@
 import express from "express";
 import sessionMiddleware from "./session";
 import gameRoutes from "./routers/gameRoutes"; 
+import userRoutes from "./routers/accountRoutes";
 import { connect, client, login, register } from "./database";
 import { ObjectId } from "mongodb"; 
 import { secureMiddleware } from "./secureMiddleware";
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set("views", "views");
 
+app.use("/", userRoutes);
 app.use("/", gameRoutes);
 
 app.use(express.static("public"));
@@ -26,13 +28,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/home", secureMiddleware, async (req, res) => {
-    if (!req.session.user) {
-        return res.redirect("/login");
-    }
-
     try {
+        const userId = req.session.user!._id;
+
         const db = client.db("lotrgame");
-        const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user._id) });
+        const user = await db.collection("users").findOne({ _id: new ObjectId(userId) });
 
         if (!user) {
             req.session.destroy(() => {});
@@ -49,70 +49,6 @@ app.get("/home", secureMiddleware, async (req, res) => {
     }
 });
 
-app.get("/login", (req, res) => {
-    if (req.session.user){
-        return res.redirect("/home");
-    } 
-
-    res.render("login", { 
-        error: "" 
-    });
-});
-
-app.post("/login", async (req, res) => {
-    if (req.session.user) {
-        return res.redirect("/home");
-    }
-
-    const username = req.body.username;
-    const password = req.body.password;
-
-    try {
-        const user = await login(username, password);
-        req.session.user = user;
-        res.redirect("/home");
-    } catch (err: any) {
-        res.render("login", { 
-            error: err.message 
-        });
-    }
-});
-
-
-app.post("/logout", (req, res) => {
-    req.session.destroy((err) => {
-        if (err) {
-            return res.status(500).send("Fout bij uitloggen.");
-        }
-        res.redirect("/login");
-    });
-});
-
-app.get("/register", (req, res) => {
-    if (req.session.user) {
-        return res.redirect("/home");
-    }
-    
-    res.render("register", { 
-        error: "" 
-    });
-});
-
-app.post("/register", async (req, res) => {
-    if (req.session.user) {
-        return res.redirect("/home");
-    }
-
-    const { username, password } = req.body;
-
-    try {
-        await register(username, password);
-        res.redirect("/login");
-    } catch (err: any) {
-        res.render("register", { error: err.message });
-    }
-});
-
 app.post("/complete-quiz", secureMiddleware, async (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Niet ingelogd");
@@ -120,7 +56,7 @@ app.post("/complete-quiz", secureMiddleware, async (req, res) => {
     }
 
     const userId = req.session.user._id;
-    const pointsEarned = parseInt(req.body.points);
+    const pointsEarned = parseFloat(req.body.points);
 
     try {
         const db = client.db("lotrgame");
@@ -137,31 +73,31 @@ app.post("/complete-quiz", secureMiddleware, async (req, res) => {
 
 app.get("/friendlist", secureMiddleware, (req, res) => {
     res.render("friendlist", {
-
+        user: req.session.user 
     });
 });
 
 app.get("/inbox", secureMiddleware, (req, res) => {
     res.render("inbox", {
-
+        user: req.session.user 
     });
 });
 
 app.get("/scoreboard", secureMiddleware, (req, res) => {
     res.render("scoreboard", {
-
+        user: req.session.user 
     });
 });
 
 app.get("/settings", secureMiddleware, (req, res) => {
     res.render("settings", {
-
+        user: req.session.user 
     });
 });
 
 app.get("/shop", secureMiddleware, (req, res) => {
     res.render("shop", {
-
+        user: req.session.user 
     });
 });
 

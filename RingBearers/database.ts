@@ -83,26 +83,25 @@ export async function login(username: string, password: string): Promise<User> {
     return {
         _id: user._id.toString(),
         username: user.username,
-        points: user.points
+        points: user.points,
+        profilePhoto: user.profilePhoto || "gezicht1.jpg" 
     };
 }
 
-export async function register(username: string, password: string): Promise<void> {
-    if (!username || !password) {
-        throw new Error("Gebruikersnaam en wachtwoord zijn verplicht.");
-    }
-
+export async function register(username: string, password: string) {
     const db = client.db("lotrgame");
-    const existingUser = await db.collection("users").findOne({ username });
 
+    const existingUser = await db.collection("users").findOne({ username });
     if (existingUser) {
-        throw new Error("Gebruikersnaam bestaat al.");
+        throw new Error("Gebruikersnaam is al in gebruik.");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
     await db.collection("users").insertOne({
         username,
         password: hashedPassword,
-        points: 0
+        points: 0,
+        profilePhoto: "gezicht1.jpg" 
     });
 }

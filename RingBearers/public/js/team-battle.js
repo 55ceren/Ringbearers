@@ -1,3 +1,20 @@
+function givePoint(aantalPunten = 1) {
+    fetch("/complete-quiz", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ points: aantalPunten })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Points updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating points:", error);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const timerAElement = document.getElementById("timerA");
     const timerBElement = document.getElementById("timerB");
@@ -63,8 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
         startTimer('B');
     }
     }
-
-
     
     function startTimer(player) {
         let timeLeft = 30;
@@ -81,14 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }, 1000);
     }
-
     
     function submitAnswer(player, answer, correctAnswer) {
         const isCorrect = answer === correctAnswer;
-        alert(isCorrect ? "Goed antwoord!" : "Fout antwoord!");
-        switchPlayer(); 
-    }
 
+        if (isCorrect) {
+            alert("Goed antwoord!");
+            givePoint(1);
+        } else {
+            alert("Fout antwoord!");
+        }
+
+        switchPlayer();
+    }
     
     function switchPlayer() {
         
