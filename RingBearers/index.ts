@@ -2,6 +2,7 @@ import express from "express";
 import sessionMiddleware from "./session";
 import gameRoutes from "./routers/gameRoutes"; 
 import userRoutes from "./routers/accountRoutes";
+import shopRoutes from "./routers/shopRoutes";
 import { connect, client, login, register } from "./database";
 import { ObjectId } from "mongodb"; 
 import { secureMiddleware } from "./secureMiddleware";
@@ -18,6 +19,8 @@ app.set("views", "views");
 
 app.use("/", userRoutes);
 app.use("/", gameRoutes);
+app.use("/", shopRoutes);
+
 
 app.use(express.static("public"));
 
@@ -91,12 +94,6 @@ app.get("/scoreboard", secureMiddleware, (req, res) => {
 
 app.get("/settings", secureMiddleware, (req, res) => {
     res.render("settings", {
-        user: req.session.user 
-    });
-});
-
-app.get("/shop", secureMiddleware, (req, res) => {
-    res.render("shop", {
         user: req.session.user 
     });
 });

@@ -102,6 +102,10 @@ export async function register(username: string, password: string) {
         username,
         password: hashedPassword,
         points: 0,
-        profilePhoto: "gezicht1.jpg" 
+        profilePhoto: "gezicht1.jpg",
+        ownedAvatars: [],
+        ownedBackgrounds: [],
+        selectedAvatar: "",
+        selectedBackground: ""
     });
 }

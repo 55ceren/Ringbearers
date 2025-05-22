@@ -3,69 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
+    <title>Shop - The Lord of the Rings Quiz</title>
     <link rel="stylesheet" href="/css/shop.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
-    <header>
-        <a href="/home" class="back-button"><i class="fas fa-arrow-left"></i>Terug</a>    
-    </header>
-    <main>
-        <h2 class="shop-text">De Shop!</h2>        
+    <div class="container">
+        <a href="/home"><button id="terug-knop">Terug</button></a>
+        <h1>Welkom bij de Shop!</h1>
         
-        <section class="shop-intro-wrapper">
-            <p class="shop-intro">
-                Welkom in de Wereld van Magische Achtergronden! ✨🏰🌿
-                Verander je scherm met onze prachtige collectie fantasie-achtergronden! Van betoverde bossen en
-                mysterieuze rijken tot legendarische landschappen vol avontuur – elke afbeelding brengt een vleugje magie
-                naar jouw apparaat.
-                Personaliseer je ruimte met adembenemende kunst en stap in een wereld vol verwondering! 🧙‍♂️🌄 Nieuwe
-                ontwerpen volgen snel!
-            </p>
-        </section>
+        <div id="reset-settings" class="reset-settings">
+            <button onclick="resetSettings()"><i class="fas fa-times"></i></button>
+        </div>
         
-        <section class="product-grid">
+        <div id="shop-items">
+            <h2>Achtergronden</h2>
+            <div class="item-container">
+                <div class="item">
+                    <div class="item-image" style="background-image: url('/images/shop/wal1.jpg');"></div>
+                    <p style="color: rgb(104, 192, 243); font-weight: bold;">50</p>
+                    <button onclick="openConfirmModal('Achtergrond 1', 50, 'background', '/images/shop/wal1.jpg')">💎</button>
+                </div>
+                <div class="item">
+                    <div class="item-image" style="background-image: url('/images/shop/wal2.jpg');"></div>
+                    <p style="color: rgb(104, 192, 243); font-weight: bold;">50</p>
+                    <button onclick="openConfirmModal('Achtergrond 2', 50, 'background', '/images/shop/wal2.jpg')">💎</button>
+                </div>
+                <div class="item">
+                    <div class="item-image" style="background-image: url('/images/shop/wal3.jpg');"></div>
+                    <p style="color: rgb(104, 192, 243); font-weight: bold;">50</p>
+                    <button onclick="openConfirmModal('Achtergrond 3', 50, 'background', '/images/shop/wal3.jpg')">💎</button>
+                </div>
+                <div class="item">
+                    <div class="item-image" style="background-image: url('/images/shop/wal4.jpg');"></div>
+                    <p style="color: rgb(104, 192, 243); font-weight: bold;">50</p>
+                    <button onclick="openConfirmModal('Achtergrond 4', 50, 'background', '/images/shop/wal4.jpg')">💎</button>
+                </div>
+            </div>
 
-            <article class="product">
-                <img src="images/achtergrond 1.jpg" alt="achtergrond 1">
-                <h3>Rivendell: Het Verborgen Paradijs van de Elfen</h3>
-                <p class="prijs">50 &#x1FA99;</p>
-                <p>Een verbluffend kunstwerk dat de majestueuze schoonheid van Rivendell vastlegt. Dit sprookjesachtige
-                    toevluchtsoord, verborgen tussen watervallen en weelderige bossen, straalt rust en magie uit. De
-                    gotische elfenarchitectuur, de mistige bergen op de achtergrond en de warme herfstkleuren brengen
-                    een betoverend tafereel tot leven. Een must-have voor elke fantasy-liefhebber of Tolkien-fan.</p>
-                <br>
-                <button class="add-to-cart" data-product="achtergrond 1" data-price="50 &#x1FA99;">&#x1F6D2;</button>
-                <button class="wishlist-icon" data-product="achtergrond 1" data-price="50 &#x1FA99;">&#10084;</button>
-            </article>
+            <h2>Avatars</h2>
+            <div class="avatar-wrapper">
+                <div class="avatar-item">
+                    <img src="/images/shop/ava3.png" alt="Avatar: dohuka" class="avatar-image" />
+                    <h3>dohuka</h3>
+                    <p style="color: rgb(104, 192, 243); font-weight: bold;">500</p>
+                    <button onclick="openConfirmModal('Avatar: dohuka', 500, 'avatar', '/images/shop/ava3.png')">💎</button>
+                </div>
+            
+                <div class="avatar-item">
+                    <img src="/images/shop/ava1.png" alt="Avatar: Saniya" class="avatar-image" />
+                    <h3>Saniya</h3>
+                    <p style="color: rgb(104, 192, 243); font-weight: bold;">600</p>
+                    <button onclick="openConfirmModal('Avatar: Saniya', 600, 'avatar', '/images/shop/ava1.png')">💎</button>
+                </div>
+            
+                <div class="avatar-item">
+                    <img src="/images/shop/ava2.png" alt="Avatar: Legolas" class="avatar-image" />
+                    <h3>Loron</h3>
+                    <p style="color: rgb(104, 192, 243); font-weight: bold;">650</p>
+                    <button onclick="openConfirmModal('Avatar: Loron', 650, 'avatar', '/images/shop/ava2.png')">💎</button>
+                </div>
+            </div>
 
-            <article class="product">
-                <img src="images/achtergrond 2.jpg" alt="achtergrond 2">
-                <h3>Gandalf’s Reis: De Wijsheid van Midden-aarde</h3>
-                <p class="prijs">100 &#x1FA99;</p>
-                <p>Een iconisch beeld van de wijze tovenaar Gandalf, wandelend door de groene heuvels van de Gouw. De
-                    zachte zonnestralen die door de wolken breken, de rustieke stenen paden en de vredige uitstraling
-                    van het landschap creëren een tijdloos tafereel. Dit kunstwerk ademt avontuur en mystiek en is een
-                    perfecte aanvulling voor liefhebbers van epische verhalen en magische werelden.</p><br>
-                <button class="add-to-cart" data-product="achtergrond 2" data-price="100 &#x1FA99;">&#x1F6D2;</button>
-                <button class="wishlist-icon" data-product="achtergrond 2" data-price="100 &#x1FA99;">&#10084;</button>
-            </article>
+            <div id="confirm-modal" class="modal hidden">
+                <div class="overlay" onclick="closeModal()"></div>
+                <div class="modal-content">
+                    <h2>Wil je dit item kopen?</h2>
+                    <p id="modal-item-name"></p>
+                    <p id="modal-item-price"></p>
+                    <div class="modal-buttons">
+                        <button class="btn-confirm" onclick="confirmPurchase()">✓</button>
+                        <button class="btn-cancel" onclick="closeModal()">✗</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <article class="product">
-                <img src="images/achtergrond 3.jpg" alt="achtergrond 3">
-                <h3>De Reis van het Reisgenootschap: Op Weg naar het Onbekende</h3>
-                <p class="prijs">75 &#x1FA99;</p>
-                <p>Een epische scène waarin de heldhaftige leden van het reisgenootschap een oude stenen brug
-                    oversteken, omringd door betoverende bossen en een donderende rivier. De zachte gouden gloed van de
-                    bladeren, de gotische elfenarchitectuur en het bruisende water geven dit kunstwerk een levendige,
-                    bijna magische sfeer. Een krachtig symbool van vriendschap, moed en avontuur.</p>
-                <button class="add-to-cart" data-product="achtergrond 3" data-price="75 &#x1FA99;">&#x1F6D2;</button>
-                <button class="wishlist-icon" data-product="achtergrond 3" data-price="75 &#x1FA99;">&#10084;</button>
-            </article>
-        </section>
-    </main>
+    <script src="/js/shop.js"></script>
 </body>
 </html>

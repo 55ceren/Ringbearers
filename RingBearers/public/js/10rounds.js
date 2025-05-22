@@ -15,9 +15,9 @@ function givePoint(aantalPunten = 1) {
     });
 }
 
-document.getElementById("quote").innerText = "loading..."; // Aangenamer voor de gebruikers
+document.getElementById("quote").innerText = "loading...";
 
-const apiKey = "0QtkvkcNqsseU-8tvS3o"; // API sleutel kan je ophalen via https://the-one-api.dev/account
+const apiKey = "0QtkvkcNqsseU-8tvS3o";
 
 const movies = [
     "The Fellowship of the Ring",
@@ -36,8 +36,6 @@ async function fetchQuoteAndCharacter() {
         let quoteData = await quoteResponse.json();
         let randomQuote = quoteData.docs[Math.floor(Math.random() * quoteData.docs.length)];
 
-        ///////////////////////////////////////////////////////////////////////////////////
-
         let characterResponse = await fetch("https://the-one-api.dev/v2/character", {
             method: "GET",
             headers: {
@@ -48,8 +46,9 @@ async function fetchQuoteAndCharacter() {
         let characters = characterData.docs;
 
         let character = characters.find(character => character._id === randomQuote.character);
-
-        ///////////////////////////////////////////////////////////////////////////////////
+        if (!character || !character.name) {
+            character = { name: "Onbekend" };
+        }
 
         let movieResponse = await fetch("https://the-one-api.dev/v2/movie", {
             method: "GET",
@@ -61,10 +60,7 @@ async function fetchQuoteAndCharacter() {
         let apiMovies = movieData.docs;
 
         let movie = apiMovies.find(movie => randomQuote.movie === movie._id);
-
         let movieName = movie ? movie.name : "Movie not found";
-
-        ///////////////////////////////////////////////////////////////////////////////////
 
         document.getElementById("quote").innerText = randomQuote.dialog;
 
@@ -120,7 +116,7 @@ async function fetchQuoteAndCharacter() {
         }
 
         function checkCompletion() {
-           if (selectedCharacter !== null && selectedMovie !== null) {
+            if (selectedCharacter !== null && selectedMovie !== null) {
                 let points = 0;
 
                 if (selectedCharacter && selectedMovie) {
@@ -143,10 +139,16 @@ async function fetchQuoteAndCharacter() {
 
                 document.getElementById("background-quiz").style.display = "none";
 
-                let levelUp = document.getElementById("level-up");
-                levelUp.innerText = "2/10";
+                let currentRound = parseInt(sessionStorage.getItem("currentRound")) || 1;
+                currentRound += 1;
+                if (currentRound > 10) {
+                    currentRound = 1;
+                }
+                sessionStorage.setItem("currentRound", currentRound);
+                document.getElementById("level-up").innerText = `${currentRound}/10`;
 
-                updateProgressBar(10);
+                updateProgressBar(currentRound);
+
                 setTimeout(() => location.reload(), 2000);
             }
         }
@@ -154,11 +156,10 @@ async function fetchQuoteAndCharacter() {
         leftButtons.forEach(button => button.addEventListener("click", () => handleCharacterClick(button)));
         rightButtons.forEach(button => button.addEventListener("click", () => handleMovieClick(button)));
 
-        function updateProgressBar(increment) {
+        function updateProgressBar(currentRound) {
             let progressBar = document.getElementById("progress-bar");
-            let currentWidth = parseInt(progressBar.style.width);
-            let newWidth = currentWidth + increment;
-            progressBar.style.width = `${Math.min(newWidth, 100)}%`;
+            let percentage = Math.min((currentRound - 1) * 10, 100);
+            progressBar.style.width = `${percentage}%`;
         }
 
         let thumbsUp = document.getElementById("thumbs-up");
@@ -166,20 +167,20 @@ async function fetchQuoteAndCharacter() {
 
         thumbsUp.addEventListener("click", function () {
             if (thumbsUp.style.color === "green") {
-                thumbsUp.style.color = "white"; 
+                thumbsUp.style.color = "white";
             } else {
                 thumbsUp.style.color = "green";
-                thumbsDown.style.color = "white"; 
+                thumbsDown.style.color = "white";
                 alert("Toegevoegd bij favorieten");
             }
         });
 
         thumbsDown.addEventListener("click", function () {
             if (thumbsDown.style.color === "red") {
-                thumbsDown.style.color = "white"; 
+                thumbsDown.style.color = "white";
             } else {
                 thumbsDown.style.color = "red";
-                thumbsUp.style.color = "white"; 
+                thumbsUp.style.color = "white";
                 alert("Geblacklisted");
             }
         });

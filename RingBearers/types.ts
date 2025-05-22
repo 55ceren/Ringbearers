@@ -4,4 +4,9 @@ export type User = {
     password?: string;
     points: number;
     profilePhoto?: string;
+    ownedAvatars?: string[];
+    ownedBackgrounds?: string[];
+    selectedAvatar?: string;
+    selectedBackground?: string;
 };
+
