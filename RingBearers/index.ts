@@ -44,7 +44,8 @@ app.get("/home", secureMiddleware, async (req, res) => {
 
         res.render("home", {
             username: user.username,
-            points: user.points
+            points: user.points,
+            user
         });
     } catch (err) {
         console.error(err);
@@ -74,28 +75,70 @@ app.post("/complete-quiz", secureMiddleware, async (req, res) => {
     }
 });
 
-app.get("/friendlist", secureMiddleware, (req, res) => {
-    res.render("friendlist", {
-        user: req.session.user 
+app.get("/friendlist", secureMiddleware, async (req, res) => {
+    const db = client.db("lotrgame");
+    const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user!._id) });
+    if (!user) return res.redirect("/login");
+    res.render("friendlist", { 
+        user 
     });
 });
 
-app.get("/inbox", secureMiddleware, (req, res) => {
-    res.render("inbox", {
-        user: req.session.user 
+app.get("/inbox", secureMiddleware, async (req, res) => {
+    const db = client.db("lotrgame");
+    const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user!._id) });
+    if (!user) return res.redirect("/login");
+    res.render("inbox", { 
+        user 
     });
 });
 
-app.get("/scoreboard", secureMiddleware, (req, res) => {
-    res.render("scoreboard", {
-        user: req.session.user 
+app.get("/scoreboard", secureMiddleware, async (req, res) => {
+    const db = client.db("lotrgame");
+    const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user!._id) });
+    if (!user) return res.redirect("/login");
+    res.render("scoreboard", { 
+        user 
     });
 });
 
-app.get("/settings", secureMiddleware, (req, res) => {
-    res.render("settings", {
-        user: req.session.user 
+app.get("/settings", secureMiddleware, async (req, res) => {
+    const db = client.db("lotrgame");
+    const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user!._id) });
+    if (!user) return res.redirect("/login");
+    res.render("settings", { 
+        user 
     });
+});
+
+app.post("/update-background", secureMiddleware, async (req, res) => {
+    if (!req.session.user) {
+        res.status(401).send("Niet ingelogd");
+        return
+    }
+
+    const userId = req.session.user._id;
+    const { background } = req.body;
+
+    if (!background) {
+        res.status(400).send("Geen achtergrond opgegeven.");
+        return
+    }
+
+    try {
+        const db = client.db("lotrgame");
+        await db.collection("users").updateOne(
+            { _id: new ObjectId(userId) },
+            { $set: { selectedBackground: background } }
+        );
+
+        req.session.user.selectedBackground = background;
+
+        res.send("Achtergrond bijgewerkt.");
+    } catch (err) {
+        console.error("Fout bij bijwerken achtergrond:", err);
+        res.status(500).send("Fout bij het bijwerken van de achtergrond.");
+    }
 });
 
 app.use((req, res) => {

@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto+Slab:wght@600&display=swap');
 
 body, html {
-    background: url('/images/lord-of-the-rings-amazon-studios.png.webp') no-repeat center center fixed;
     background-size: cover;
     background-attachment: fixed;
     user-select: none;
@@ -14,6 +13,17 @@ body, html {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
 }
 
 header {

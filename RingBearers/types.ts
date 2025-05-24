@@ -9,4 +9,3 @@ export type User = {
     selectedAvatar?: string;
     selectedBackground?: string;
 };
-

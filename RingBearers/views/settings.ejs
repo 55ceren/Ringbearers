@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
-    <link rel="stylesheet" href="/css/settings.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <div class="background"></div>
+<%- include('partials/header', {title: 'Profile Page', cssLink: '/css/settings.css', iconsWeb: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"}) %>
+
+    <div class="background" style="background-image: url('/images/shop/<%= user.selectedBackground %>');"></div>
 
     <h1>Instelling</h1>
 
@@ -21,7 +13,7 @@
     <div class="profile-container">
         <img src="/images/settings/<%= user.profilePhoto %>" class="profile-photo" style="background-color: rgba(169, 169, 169, 0.5);">
         <br>
-        <button class="change-photo-btn">Profiel foto wijzigen</button>
+        <button class="change-photo-btn profile">Profiel foto wijzigen</button>
     </div>
 
     <div class="container">
@@ -40,7 +32,7 @@
     </div>
 
     <br>
-    <button class="change-photo-btn">Achtergrond wijzigen</button>
+    <button class="change-photo-btn wallpaper">Achtergrond wijzigen</button>
     <br>
     <form action="/delete-account" method="POST" onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen? Dit kan niet ongedaan worden gemaakt.');">
         <button class="change-photo-btn" type="submit">Account verwijderen</button>
@@ -63,6 +55,20 @@
             </div>
         </div>
     </div>
+
+    <div id="wallpaperModal" class="modal">
+        <div class="modal-content">
+            <span class="close close-wallpaper">&times;</span>
+            <h2>Kies een nieuwe achtergrond</h2>
+            <div class="photo-grid">
+                <% user.ownedBackgrounds.forEach(bg => { %>
+                    <% const fileName = bg.split('/').pop(); %>
+                    <img src="<%= bg %>" class="profile-option" onclick="selectWallpaper('<%= fileName %>')">
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
     <script src="/js/settings.js"></script>
 </body>
 </html>

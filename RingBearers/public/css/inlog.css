@@ -17,6 +17,17 @@ body {
     background-position: center;
 }
 
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
 .wrapper {
     width: 420px;
     background-color: transparent;

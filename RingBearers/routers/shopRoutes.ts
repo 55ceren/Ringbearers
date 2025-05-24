@@ -5,9 +5,18 @@ import { secureMiddleware } from "../secureMiddleware";
 
 const router = express.Router();
 
-router.get("/shop", secureMiddleware, (req, res) => {
-    res.render("shop", {
-        user: req.session.user 
+router.get("/shop", secureMiddleware, async (req, res) => {
+    const userId = req.session.user!._id;
+    const db = client.db("lotrgame");
+    const user = await db.collection("users").findOne({ _id: new ObjectId(userId) });
+
+    if (!user) {
+        req.session.destroy(() => {});
+        return res.redirect("/login");
+    }
+
+    res.render("shop", { 
+        user 
     });
 });
 

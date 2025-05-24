@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="<%= cssLink %>">
+    <link rel="stylesheet" href="<%= iconsWeb %>">
+</head>
+<body>
+    <% const bg = user.selectedBackground ? '/images/shop/' + user.selectedBackground : '/images/lord-of-the-rings-amazon-studios.png.webp'; %>
+    <div class="background" style="background-image: url('<%= bg %>');"></div>
+
