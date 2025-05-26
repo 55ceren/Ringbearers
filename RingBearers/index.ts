@@ -114,7 +114,7 @@ app.get("/settings", secureMiddleware, async (req, res) => {
 app.post("/update-background", secureMiddleware, async (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Niet ingelogd");
-        return
+        return;
     }
 
     const userId = req.session.user._id;
@@ -122,11 +122,22 @@ app.post("/update-background", secureMiddleware, async (req, res) => {
 
     if (!background) {
         res.status(400).send("Geen achtergrond opgegeven.");
-        return
+        return;
     }
+
+    const defaultBackgrounds = [
+        "/images/lord-of-the-rings-amazon-studios.png.webp"
+    ];
 
     try {
         const db = client.db("lotrgame");
+        const user = await db.collection("users").findOne({ _id: new ObjectId(userId) });
+
+        if (!user || ![...user.ownedBackgrounds, ...defaultBackgrounds].includes(background)) {
+            res.status(403).send("Je bezit deze achtergrond niet.");
+            return;
+        }
+
         await db.collection("users").updateOne(
             { _id: new ObjectId(userId) },
             { $set: { selectedBackground: background } }
@@ -140,6 +151,56 @@ app.post("/update-background", secureMiddleware, async (req, res) => {
         res.status(500).send("Fout bij het bijwerken van de achtergrond.");
     }
 });
+
+app.post("/update-avatar", secureMiddleware, async (req, res) => {
+    if (!req.session.user) {
+        res.status(401).send("Niet ingelogd");
+        return;
+    }
+
+    const userId = req.session.user._id;
+    const { avatar } = req.body;
+
+    if (!avatar) {
+        res.status(400).send("Geen avatar opgegeven.");
+        return;
+    }
+
+    const defaultAvatars = [
+        "/images/settings/gezicht1.jpg",
+        "/images/settings/gezicht2.jpg",
+        "/images/settings/gezicht3.jpg",
+        "/images/settings/gezicht4.jpg"
+    ];
+
+    try {
+        const db = client.db("lotrgame");
+        const user = await db.collection("users").findOne({ _id: new ObjectId(userId) });
+
+        if (!user) {
+            res.status(404).send("Gebruiker niet gevonden.");
+            return;
+        }
+
+        if (![...user.ownedAvatars, ...defaultAvatars].includes(avatar)) {
+            res.status(403).send("Je bezit deze avatar niet.");
+            return;
+        }
+
+        await db.collection("users").updateOne(
+            { _id: new ObjectId(userId) },
+            { $set: { selectedAvatar: avatar } }
+        );
+
+        req.session.user.selectedAvatar = avatar;
+
+        res.send("Avatar bijgewerkt.");
+    } catch (err) {
+        console.error("Fout bij bijwerken avatar:", err);
+        res.status(500).send("Fout bij het bijwerken van de avatar.");
+    }
+});
+
 
 app.use((req, res) => {
     res.status(404).send("404 Not Found");

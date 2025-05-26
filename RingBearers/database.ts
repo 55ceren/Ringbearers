@@ -101,8 +101,7 @@ export async function register(username: string, password: string) {
     await db.collection("users").insertOne({
         username,
         password: hashedPassword,
-        points: 0,
-        profilePhoto: "gezicht1.jpg",
+        points: 0,        
         ownedAvatars: [],
         ownedBackgrounds: [],
         selectedAvatar: "",
