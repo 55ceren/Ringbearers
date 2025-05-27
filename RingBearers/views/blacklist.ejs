@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: 'Zwartlijst', cssLink: '/css/default.css', iconsWeb: '...' }) %>
+
+<h1>Geblackliste Quotes</h1>
+
+<ul>
+  <% quotes.forEach(quote => { %>
+    <li>
+      "<%= quote.text %>" - <%= quote.character %>
+      <form method="POST" action="/blacklist/remove" style="display:inline">
+        <input type="hidden" name="quoteId" value="<%= quote._id %>">
+        <button type="submit">🗑️ Verwijder</button>
+      </form>
+      <form method="POST" action="/blacklist/update-reason">
+        <input type="hidden" name="quoteId" value="<%= quote._id %>">
+        <input type="text" name="reason" value="<%= quote.reason %>" placeholder="Reden aanpassen">
+        <button type="submit">💾 Bewaar reden</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>
+
+</body>
+</html>

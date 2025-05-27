@@ -1,16 +1,26 @@
-<%- include('partials/header', {title: 'Scorebord', cssLink: '/css/scoreboard.css', iconsWeb: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"}) %>
-    <div class="scoreboard-container">
-        <header>
-            <a href="/home" class="back-button">
-                <i class="arrow-icon fas fa-arrow-left"></i>Terug 
-            </a>
-            <h1 class="scoreboard-title">Scorebord</h1>
-        </header>
-        <div id="score-list">
-            <ul id="scoreboard">
-            </ul>
-        </div>
+<%- include('partials/header', { title: 'Scorebord', cssLink: '/css/scoreboard.css', iconsWeb: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" }) %>
+<div class="scoreboard-container">
+    <header>
+        <a href="/home" class="back-button">
+            <i class="arrow-icon fas fa-arrow-left"></i> Terug 
+        </a>
+        <h1 class="scoreboard-title">Scorebord</h1>
+    </header>
+
+    <div id="score-list">
+        <ul id="scoreboard">
+            <% users.forEach((user, index) => { %>
+                <li class="score-entry <%= user._id === currentUser._id ? 'current-user' : '' %>">
+                    <span class="rank">#<%= index + 1 %></span>
+                    <% if (user.selectedAvatar) { %>
+                        <img src="<%= user.selectedAvatar %>" alt="Avatar" class="avatar">
+                    <% } %>
+                    <span class="username"><%= user.username %></span>
+                    <span class="points"><%= user.points %> punten</span>
+                </li>
+            <% }) %>
+        </ul>
     </div>
-    <script src="/js/scoreboard.js"></script>
+</div>
 </body>
 </html>

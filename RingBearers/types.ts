@@ -8,4 +8,6 @@ export type User = {
     ownedBackgrounds?: string[];
     selectedAvatar?: string;
     selectedBackground?: string;
+    favoriteQuotes?: string[];
+    blacklistedQuotes?: { quoteId: string; reason: string }[];
 };

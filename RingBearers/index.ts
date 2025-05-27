@@ -75,31 +75,32 @@ app.post("/complete-quiz", secureMiddleware, async (req, res) => {
     }
 });
 
-app.get("/friendlist", secureMiddleware, async (req, res) => {
-    const db = client.db("lotrgame");
-    const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user!._id) });
-    if (!user) return res.redirect("/login");
-    res.render("friendlist", { 
-        user 
-    });
-});
-
-app.get("/inbox", secureMiddleware, async (req, res) => {
-    const db = client.db("lotrgame");
-    const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user!._id) });
-    if (!user) return res.redirect("/login");
-    res.render("inbox", { 
-        user 
-    });
-});
+// app.get("/", secureMiddleware, async (req, res) => {
+//     const db = client.db("lotrgame");
+//     const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user!._id) });
+//     if (!user) return res.redirect("/login");
+//     res.render("", { 
+//         user 
+//     });
+// });
 
 app.get("/scoreboard", secureMiddleware, async (req, res) => {
     const db = client.db("lotrgame");
-    const user = await db.collection("users").findOne({ _id: new ObjectId(req.session.user!._id) });
-    if (!user) return res.redirect("/login");
-    res.render("scoreboard", { 
-        user 
-    });
+
+    try {
+        const users = await db.collection("users")
+            .find({}, { projection: { username: 1, points: 1, selectedAvatar: 1 } })
+            .sort({ points: -1 })
+            .toArray();
+
+        res.render("scoreboard", { 
+            currentUser: req.session.user,
+            users
+        });
+    } catch (err) {
+        console.error("Fout bij ophalen scoreboard:", err);
+        res.status(500).send("Fout bij het ophalen van het scorebord.");
+    }
 });
 
 app.get("/settings", secureMiddleware, async (req, res) => {
@@ -200,7 +201,6 @@ app.post("/update-avatar", secureMiddleware, async (req, res) => {
         res.status(500).send("Fout bij het bijwerken van de avatar.");
     }
 });
-
 
 app.use((req, res) => {
     res.status(404).send("404 Not Found");

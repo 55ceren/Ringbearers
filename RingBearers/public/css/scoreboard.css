@@ -86,3 +86,29 @@ header {
 #scoreboard li span {
     font-weight: bold;
 }
+
+#scoreboard {
+    list-style: none;
+    padding: 0;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.rank {
+    width: 30px;
+    font-weight: bold;
+}
+
+.username {
+    flex-grow: 1;
+}
+
+.points {
+    font-weight: bold;
+    color: white;
+}
