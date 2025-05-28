@@ -1,4 +1,4 @@
-<%- include('partials/header', { title: 'Favorieten', cssLink: '/css/default.css', iconsWeb: '...' }) %>
+<%- include('partials/header', { title: 'Favorieten', cssLink: '/css/default.css', iconsWeb: '' }) %>
 
 <h1>Favoriete Quotes</h1>
 
@@ -18,7 +18,7 @@
 <ul>
   <% quotes.forEach(quote => { %>
     <li>
-      "<%= quote.text %>" - <%= quote.character %>
+      "<%= quote.dialog %>" - <%= quote.character %>
       <form action="/favorites/remove" method="POST" style="display:inline">
         <input type="hidden" name="quoteId" value="<%= quote._id %>">
         <button type="submit">🗑️ Verwijder</button>

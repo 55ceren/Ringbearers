@@ -165,29 +165,79 @@ async function fetchQuoteAndCharacter() {
         let thumbsUp = document.getElementById("thumbs-up");
         let thumbsDown = document.getElementById("thumbs-down");
 
-        thumbsUp.addEventListener("click", function () {
+        thumbsUp.addEventListener("click", async function () {
             if (thumbsUp.style.color === "green") {
                 thumbsUp.style.color = "white";
             } else {
                 thumbsUp.style.color = "green";
                 thumbsDown.style.color = "white";
-                alert("Toegevoegd bij favorieten");
+
+                // POST naar favorites sturen
+                const data = {
+                    quoteId: randomQuote._id,
+                    character: character._id,
+                    movie: randomQuote.movie,
+                    dialog: randomQuote.dialog
+                };
+
+                try {
+                    const response = await fetch("/favorites", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        alert("Toegevoegd bij favorieten");
+                    } else {
+                        alert("Kon favoriet niet toevoegen");
+                    }
+                } catch (error) {
+                    console.error("Fout bij toevoegen favoriet:", error);
+                    alert("Fout bij toevoegen favoriet");
+                }
             }
         });
 
-        thumbsDown.addEventListener("click", function () {
+        thumbsDown.addEventListener("click", async function () {
             if (thumbsDown.style.color === "red") {
                 thumbsDown.style.color = "white";
             } else {
                 thumbsDown.style.color = "red";
                 thumbsUp.style.color = "white";
-                alert("Geblacklisted");
+
+                // POST naar blacklist sturen
+                const data = {
+                    quoteId: randomQuote._id,
+                    reason: "User blacklisted this quote"  // Je kan hier eventueel een andere reden sturen
+                };
+
+                try {
+                    const response = await fetch("/blacklist", {   // Hier ga ik even uit van een aparte /blacklist endpoint
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        alert("Quote geblacklist");
+                    } else {
+                        alert("Kon quote niet blacklisten");
+                    }
+                } catch (error) {
+                    console.error("Fout bij blacklisten:", error);
+                    alert("Fout bij blacklisten");
+                }
             }
         });
 
-    } catch (error) {
-        console.error("Fout bij ophalen:", error);
-    }
-}
+            } catch (error) {
+                console.error("Fout bij ophalen:", error);
+            }
+        }
 
 fetchQuoteAndCharacter();
