@@ -1,4 +1,4 @@
-<%- include("partials/header-level", { cssLink: "/css/api-modes.css" }) %>
+<%- include("partials/header-level", { cssLink: "/css/api-modes.css", pageTitle: "10 Rounds" }) %>
         <main>       
             <div>
                 <img src="/images/ROTK_eye_of_sauron.jpg" alt="Quiz afbeelding" id="background-quiz" class="quiz-image">
@@ -27,5 +27,13 @@
                     <button id="button6" class="answers"></button> 
                 </div>
             </section>
+
+            <div id="final-score" style="display: none; flex-direction: column; align-items: center; color: white; font-size: 20px;">
+                <h2>Gefeliciteerd! 🎉</h2>
+                <p>Je hebt de quiz voltooid.</p>
+                <p id="final-points"></p>
+                <p id="high-score" style="margin-top: 10px; font-weight: bold;"></p>
+                <a href="/home" style="text-decoration: none; color: gold;">Terug naar home</a>
+            </div>
         </main>
 <%- include('partials/footer-level', { scriptLink: "/js/10rounds.js" }) %>

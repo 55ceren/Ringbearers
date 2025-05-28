@@ -1,0 +1,126 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('/images/lord-of-the-rings-amazon-studios.png.webp') no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.lists-container {
+    border: 5px solid white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 570px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    position: relative;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.back-button {
+    font-size: 18px;
+    color: white;
+    background-color: rgba(70, 70, 70, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: gold;
+    color: black;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li form {
+  display: inline-block;
+  margin-top: 4px;
+}
+
+li form button {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+li form button:hover {
+  background-color: gold;
+  color: black;
+}
+
+li form input[type="text"] {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: transparent;
+  color: white;
+  padding: 2px 4px;
+  font-size: 0.9rem;
+  width: 60%;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+li form input[type="text"]:focus {
+  border-color: gold;
+}
+
+a {
+  text-decoration: none;
+  color: inherit; 
+}
+
+a:hover {
+  text-decoration: underline; 
+  color: gold; 
+}

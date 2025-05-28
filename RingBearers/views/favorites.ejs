@@ -1,12 +1,17 @@
-<%- include('partials/header', { title: 'Favorieten', cssLink: '/css/default.css', iconsWeb: '' }) %>
-
-<h1>Favoriete Quotes</h1>
+<%- include('partials/header', { title: 'Favorieten', cssLink: '/css/fav-blacklist.css', iconsWeb: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' }) %>
+<div class="lists-container">
+    <header>
+        <a href="/home" class="back-button">
+            <i class="arrow-icon fas fa-arrow-left"></i> Terug 
+        </a>
+        <h1>Favoriete Quotes</h1>
+    </header>
 
 <p><a href="/favorites/export">📄 Exporteer naar tekstbestand</a></p>
 
 <ul>
   <% for (const character in characterCounts) { %>
-    <li>
+    <li style="display: flex; flex-direction: row;">
       <a href="/favorites/character/<%= character %>">
         <%= character %> (<%= characterCounts[character] %>)
       </a>
@@ -20,12 +25,12 @@
     <li>
       "<%= quote.dialog %>" - <%= quote.character %>
       <form action="/favorites/remove" method="POST" style="display:inline">
-        <input type="hidden" name="quoteId" value="<%= quote._id %>">
+        <input type="hidden" name="quoteId" value="<%= quote.quoteId %>">
         <button type="submit">🗑️ Verwijder</button>
       </form>
     </li>
   <% }) %>
 </ul>
-
+</div>
 </body>
 </html>

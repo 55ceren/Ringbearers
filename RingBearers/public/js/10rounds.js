@@ -25,7 +25,17 @@ const movies = [
     "The Return of the King"
 ];
 
+let currentRound = parseInt(sessionStorage.getItem("currentRound")) || 1;
+if (currentRound === 1) {
+    sessionStorage.setItem("roundScore", 0);
+}
+
 async function fetchQuoteAndCharacter() {
+    let savedRound = parseInt(sessionStorage.getItem("currentRound")) || 1;
+    if (savedRound > 10) {
+        sessionStorage.setItem("currentRound", 1);
+    }
+
     try {
         let quoteResponse = await fetch("https://the-one-api.dev/v2/quote", {
             method: "GET",
@@ -141,15 +151,39 @@ async function fetchQuoteAndCharacter() {
 
                 let currentRound = parseInt(sessionStorage.getItem("currentRound")) || 1;
                 currentRound += 1;
-                if (currentRound > 10) {
-                    currentRound = 1;
-                }
                 sessionStorage.setItem("currentRound", currentRound);
-                document.getElementById("level-up").innerText = `${currentRound}/10`;
 
-                updateProgressBar(currentRound);
+                let currentScore = parseFloat(sessionStorage.getItem("roundScore")) || 0;
+                currentScore += points;
+                sessionStorage.setItem("roundScore", currentScore);
 
-                setTimeout(() => location.reload(), 2000);
+                if (currentRound > 10) {
+                    document.getElementById("level-up").innerText = `10/10`;
+
+                    const totalScore = sessionStorage.getItem("roundScore") || 0;
+                    const scoreDiv = document.getElementById("final-score");
+                    scoreDiv.style.display = "flex";
+                    document.getElementById("final-points").innerText = `Je behaalde ${totalScore} punten!`;
+
+                    let highScore = localStorage.getItem("highScore") || 0;
+                    if (parseFloat(totalScore) > parseFloat(highScore)) {
+                        localStorage.setItem("highScore", totalScore);
+                        highScore = totalScore;
+                    }
+                    document.getElementById("high-score").innerText = `High score: ${highScore}`;
+
+                    document.getElementById("quote").style.display = "none";
+                    document.getElementById("buttons").style.display = "none";
+                    document.getElementById("progress-bar").style.width = `100%`;
+
+                    sessionStorage.removeItem("currentRound");
+                    sessionStorage.removeItem("roundScore");
+                } else {
+
+                    document.getElementById("level-up").innerText = `${currentRound}/10`;
+                    updateProgressBar(currentRound);
+                    setTimeout(() => location.reload(), 2000);
+                }
             }
         }
 
@@ -171,8 +205,7 @@ async function fetchQuoteAndCharacter() {
             } else {
                 thumbsUp.style.color = "green";
                 thumbsDown.style.color = "white";
-
-                // POST naar favorites sturen
+                
                 const data = {
                     quoteId: randomQuote._id,
                     character: character._id,
@@ -207,15 +240,14 @@ async function fetchQuoteAndCharacter() {
             } else {
                 thumbsDown.style.color = "red";
                 thumbsUp.style.color = "white";
-
-                // POST naar blacklist sturen
+                
                 const data = {
                     quoteId: randomQuote._id,
-                    reason: "User blacklisted this quote"  // Je kan hier eventueel een andere reden sturen
+                    reason: "User blacklisted this quote" 
                 };
 
                 try {
-                    const response = await fetch("/blacklist", {   // Hier ga ik even uit van een aparte /blacklist endpoint
+                    const response = await fetch("/blacklist", {   
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

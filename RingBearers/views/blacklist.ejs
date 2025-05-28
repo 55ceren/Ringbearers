@@ -1,23 +1,28 @@
-<%- include('partials/header', { title: 'Zwartlijst', cssLink: '/css/default.css', iconsWeb: '...' }) %>
-
-<h1>Geblackliste Quotes</h1>
+<%- include('partials/header', { title: 'Zwartlijst', cssLink: '/css/fav-blacklist.css', iconsWeb: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' }) %>
+<div class="lists-container">
+    <header>
+        <a href="/home" class="back-button">
+            <i class="arrow-icon fas fa-arrow-left"></i> Terug 
+        </a>
+        <h1>Geblackliste Quotes</h1>
+    </header>
 
 <ul>
   <% quotes.forEach(quote => { %>
     <li>
-      "<%= quote.text %>" - <%= quote.character %>
+      "<%= quote.dialog %>" - <%= quote.character %>
       <form method="POST" action="/blacklist/remove" style="display:inline">
-        <input type="hidden" name="quoteId" value="<%= quote._id %>">
+        <input type="hidden" name="quoteId" value="<%= quote.quoteId %>">
         <button type="submit">🗑️ Verwijder</button>
       </form>
       <form method="POST" action="/blacklist/update-reason">
-        <input type="hidden" name="quoteId" value="<%= quote._id %>">
+        <input type="hidden" name="quoteId" value="<%= quote.quoteId %>">
         <input type="text" name="reason" value="<%= quote.reason %>" placeholder="Reden aanpassen">
         <button type="submit">💾 Bewaar reden</button>
       </form>
     </li>
   <% }) %>
 </ul>
-
+</div>
 </body>
 </html>
